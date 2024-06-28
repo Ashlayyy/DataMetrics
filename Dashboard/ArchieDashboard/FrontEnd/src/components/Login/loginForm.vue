@@ -18,7 +18,7 @@
           type="submit"
           @click="login()"
         >
-          Log in to Dashboard
+          {{ $t('buttonText.login') }}
         </v-btn>
       </v-card>
     </v-form>

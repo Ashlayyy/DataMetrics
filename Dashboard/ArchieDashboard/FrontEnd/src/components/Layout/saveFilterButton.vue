@@ -1,5 +1,5 @@
 <template>
-  <v-btn variant="tonal" @click="emit('data-saving')"> Opslaan! </v-btn>
+  <v-btn variant="tonal" @click="emit('data-saving')"> {{ $t('buttonTekst.save') }} </v-btn>
 </template>
 
 <script lang="ts" setup>

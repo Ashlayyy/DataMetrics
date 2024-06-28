@@ -1,3 +1,3 @@
 <template>
-  <v-btn size="small"> Clear </v-btn>
+  <v-btn size="small"> {{ $t('buttonTekst.clear') }} </v-btn>
 </template>

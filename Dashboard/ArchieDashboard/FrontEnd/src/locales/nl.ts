@@ -4,7 +4,22 @@ export default {
   getBackButton: 'Terug naar hoofdpagina',
   lastUpdated: 'Data last geupdate',
   buttonTekst: {
-    compare: 'Vergelijken'
+    compare: 'Vergelijken',
+    clear: 'Maak leeg',
+    filterText: 'Geen datums geselcteerd!',
+    save: 'Opslaan',
+    login: 'Inloggen',
+  },
+  select: {
+    geenResultaatMatching: 'Er is geen resultaat met ',
+    geenResultaat: 'Geen data beschikbaar. Probeer het later opnieuw.',
+  },
+  menu: {
+    profile: {
+      account: 'Profiel',
+      settings: 'Instellingen',
+      logout: 'Uitloggen'
+    }
   },
   predicted: {
     title: 'Voorspelde Gigabytes',

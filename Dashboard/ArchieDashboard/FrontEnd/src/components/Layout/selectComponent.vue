@@ -16,10 +16,10 @@
       <template v-slot:no-data>
         <v-list-item>
           <v-list-item-title v-if="items.length > 0">
-            No results matching "<strong>{{ search }}</strong
+            {{ $t('select.geenResultaatMatching') }} "<strong>{{ search }}</strong
             >"
           </v-list-item-title>
-          <v-list-item-title v-else> No data available. Please try again later. </v-list-item-title>
+          <v-list-item-title v-else> {{  $t('select.geenResultaat') }} </v-list-item-title>
         </v-list-item>
       </template>
     </v-autocomplete>

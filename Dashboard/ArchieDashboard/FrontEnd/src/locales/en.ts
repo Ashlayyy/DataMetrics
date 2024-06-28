@@ -4,7 +4,22 @@ export default {
   getBackButton: 'Back to overview',
   lastUpdated: 'Data last updated',
   buttonTekst: {
-    compare: 'Compare'
+    compare: 'Compare',
+    clear: 'Clear',
+    filterText: 'No date selected!',
+    save: 'Save',
+    login: 'Log in',
+  },
+  select: {
+    geenResultaatMatching: 'No results matching',
+    geenResultaat: 'No data available. Please try again later.',
+  },
+  menu: {
+    profile: {
+      account: 'Account',
+      settings: 'Settings',
+      logout: 'Logout'
+    }
   },
   predicted: {
     title: 'Predicted Gigabytes',

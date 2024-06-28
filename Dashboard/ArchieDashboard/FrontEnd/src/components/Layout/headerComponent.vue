@@ -3,7 +3,7 @@
     <div class="filterSection" v-if="route.fullPath !== '/profile' && route.fullPath !== '/settings'">
       <div class="filterWrapper menu-activator" @click="open = !open">
         <v-btn :icon="open === true ? 'mdi-chevron-up' : 'mdi-chevron-down'" size="xsmal"></v-btn>
-        <span>{{ selectedDates[0] ? selectedDates[0] : 'No Date selected!' }}</span>
+        <span>{{ selectedDates[0] ? selectedDates[0] : $t('buttonTekst.filterText') }}</span>
         <span
           ><b>{{ !selectedDates[0] ? '' : '-' }}</b></span
         >

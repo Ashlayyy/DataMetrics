@@ -15,11 +15,11 @@
             {{ user?.email }}
           </p>
           <v-divider class="my-3"></v-divider>
-          <v-btn href="/profile" variant="text" rounded>Account</v-btn>
+          <v-btn href="/profile" variant="text" rounded>{{ $t('menu.profile.account') }}</v-btn>
           <v-divider class="my-3"></v-divider>
-          <v-btn href="/settings" variant="text" rounded>Settings</v-btn>
+          <v-btn href="/settings" variant="text" rounded>{{ $t('menu.profile.settings') }}</v-btn>
           <v-divider class="my-3"></v-divider>
-          <v-btn @click="logOut()" variant="text" rounded>Logout</v-btn>
+          <v-btn @click="logOut()" variant="text" rounded>{{ $t('menu.profile.logout') }}</v-btn>
         </div>
       </v-card-text>
     </v-card>
