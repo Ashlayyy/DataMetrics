@@ -1,0 +1,1859 @@
+{
+	"info": {
+		"_postman_id": "9955176a-fc35-47e9-865a-fad5592dcae1",
+		"name": "API documentation",
+		"description": "# 📄 Archie Dashboard API Documentation\n\n---\n\nThe Archie Dashboard API provides resources that enable you to get details about companies that use Archie.\n\n## **Getting started guide**\n\nTo start using the Archie Dashboard API, you need to -\n\n- Soon there will be a API Key required for all calls to this API. When this change will come into effect the documentation will be updated accordingly.\n    \n- The API has rate and usages limits. These are defined in the section `Rate and usage limits`\n    \n- The API returns request responses in JSON format. When an API request returns an error, it is sent in the JSON response as an error key.\n    \n\n## Authentication\n\nThe Archie Dashboard API currently uses no authentication, but this will change soon.\n\nThis API will soon use API keys to interact with the API, whenever this change will come into effect, more information will be made public.\n\n## Rate and usage limits\n\nAPI access rate limits apply at a per-IP basis in unit time. The limit is 150 requests per 15 minutes. If you exceed either limit, your request will return an HTTP 429 Too Many Requests status code.\n\nAfter 100 calls in 15 minutes the API will slow down your request by 100ms each time.\n\nEach API response returns the following set of headers to help you identify your use status:\n\n| Header | Description |\n| --- | --- |\n| `X-RateLimit-Limit` | The maximum number of requests that the consumer is permitted to make per minute. |\n| `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window. |\n| `X-RateLimit-Reset` | The time at which the current rate limit window resets in UTC epoch seconds. |\n\n### 503 response\n\nAn HTTP `503` response from our servers indicates there is an unexpected spike in API access traffic. We will always try our best to make sure it is working again in the smallest amount of time.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32881844"
+	},
+	"item": [
+		{
+			"name": "Database",
+			"item": [
+				{
+					"name": "Metrics",
+					"item": [
+						{
+							"name": "Metrics",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Response status code is 200\", function () {\r",
+											"  pm.expect(pm.response.to.have.status(200));\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"BackupDate is in a valid date format\", function () {\r",
+											"    const responseData = pm.response.json();\r",
+											"    \r",
+											"    pm.expect(responseData.data).to.be.an('array');\r",
+											"    responseData.data.forEach(function(item) {\r",
+											"        pm.expect(item.BackupDate).to.match(/^\\d{4}-\\d{2}-\\d{2}$/);\r",
+											"    });\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Chart data should exist and be an object\", function () {\r",
+											"    const responseData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(responseData.chartData).to.exist.and.to.be.an('object');\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Response time is less than 800ms\", function () {\r",
+											"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4000/api/v1/database/metrics",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"api",
+										"v1",
+										"database",
+										"metrics"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successful response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:4000/api/v1/database/metrics",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "4000",
+											"path": [
+												"api",
+												"v1",
+												"database",
+												"metrics"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-security-policy",
+											"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+										},
+										{
+											"key": "cross-origin-opener-policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "cross-origin-resource-policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "origin-agent-cluster",
+											"value": "?1"
+										},
+										{
+											"key": "referrer-policy",
+											"value": "no-referrer"
+										},
+										{
+											"key": "strict-transport-security",
+											"value": "max-age=15552000; includeSubDomains"
+										},
+										{
+											"key": "x-content-type-options",
+											"value": "nosniff"
+										},
+										{
+											"key": "x-dns-prefetch-control",
+											"value": "off"
+										},
+										{
+											"key": "x-download-options",
+											"value": "noopen"
+										},
+										{
+											"key": "x-frame-options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "x-permitted-cross-domain-policies",
+											"value": "none"
+										},
+										{
+											"key": "x-xss-protection",
+											"value": "0"
+										},
+										{
+											"key": "x-ratelimit-limit",
+											"value": "150"
+										},
+										{
+											"key": "x-ratelimit-remaining",
+											"value": "148"
+										},
+										{
+											"key": "date",
+											"value": "Mon, 27 May 2024 09:54:17 GMT"
+										},
+										{
+											"key": "x-ratelimit-reset",
+											"value": "1716804558"
+										},
+										{
+											"key": "access-control-allow-origin",
+											"value": "*"
+										},
+										{
+											"key": "access-control-allow-credentials",
+											"value": "true"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "etag",
+											"value": "W/\"f0b-19mZDEJgDaSQsyJTE5o/6v2e/2c\""
+										},
+										{
+											"key": "cache-control",
+											"value": "max-age=1757"
+										},
+										{
+											"key": "apicache-store",
+											"value": "memory"
+										},
+										{
+											"key": "apicache-version",
+											"value": "1.6.3"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": [\n        {\n            \"BackupDate\": \"2024-04-22\",\n            \"Type\": \"users\",\n            \"IntData\": 3411\n        },\n        {\n            \"BackupDate\": \"2024-04-21\",\n            \"Type\": \"users\",\n            \"IntData\": 3411\n        },\n        {\n            \"BackupDate\": \"2024-04-20\",\n            \"Type\": \"users\",\n            \"IntData\": 3411\n        },\n        {\n            \"BackupDate\": \"2024-04-19\",\n            \"Type\": \"users\",\n            \"IntData\": 3411\n        },\n        {\n            \"BackupDate\": \"2024-04-17\",\n            \"Type\": \"users\",\n            \"IntData\": 3411\n        },\n        {\n            \"BackupDate\": \"2024-04-16\",\n            \"Type\": \"users\",\n            \"IntData\": 3411\n        },\n        {\n            \"BackupDate\": \"2024-04-15\",\n            \"Type\": \"users\",\n            \"IntData\": 3434\n        },\n        {\n            \"BackupDate\": \"2024-04-22\",\n            \"Type\": \"mfcp_size\",\n            \"IntData\": 763.76\n        },\n        {\n            \"BackupDate\": \"2024-04-21\",\n            \"Type\": \"mfcp_size\",\n            \"IntData\": 763.76\n        },\n        {\n            \"BackupDate\": \"2024-04-20\",\n            \"Type\": \"mfcp_size\",\n            \"IntData\": 763.77\n        },\n        {\n            \"BackupDate\": \"2024-04-19\",\n            \"Type\": \"mfcp_size\",\n            \"IntData\": 763.64\n        },\n        {\n            \"BackupDate\": \"2024-04-17\",\n            \"Type\": \"mfcp_size\",\n            \"IntData\": 763.36\n        },\n        {\n            \"BackupDate\": \"2024-04-16\",\n            \"Type\": \"mfcp_size\",\n            \"IntData\": 763.21\n        },\n        {\n            \"BackupDate\": \"2024-04-15\",\n            \"Type\": \"mfcp_size\",\n            \"IntData\": 763.54\n        },\n        {\n            \"BackupDate\": \"2024-04-22\",\n            \"Type\": \"database_size\",\n            \"IntData\": 8500.44\n        },\n        {\n            \"BackupDate\": \"2024-04-21\",\n            \"Type\": \"database_size\",\n            \"IntData\": 8498.37\n        },\n        {\n            \"BackupDate\": \"2024-04-20\",\n            \"Type\": \"database_size\",\n            \"IntData\": 8498.21\n        },\n        {\n            \"BackupDate\": \"2024-04-19\",\n            \"Type\": \"database_size\",\n            \"IntData\": 8493.12\n        },\n        {\n            \"BackupDate\": \"2024-04-17\",\n            \"Type\": \"database_size\",\n            \"IntData\": 8475.19\n        },\n        {\n            \"BackupDate\": \"2024-04-16\",\n            \"Type\": \"database_size\",\n            \"IntData\": 8468.29\n        },\n        {\n            \"BackupDate\": \"2024-04-15\",\n            \"Type\": \"database_size\",\n            \"IntData\": 8476.9\n        },\n        {\n            \"BackupDate\": \"2024-04-22\",\n            \"Type\": \"corresp_size\",\n            \"IntData\": 7716.7\n        },\n        {\n            \"BackupDate\": \"2024-04-21\",\n            \"Type\": \"corresp_size\",\n            \"IntData\": 7716.64\n        },\n        {\n            \"BackupDate\": \"2024-04-20\",\n            \"Type\": \"corresp_size\",\n            \"IntData\": 7716.5\n        },\n        {\n            \"BackupDate\": \"2024-04-19\",\n            \"Type\": \"corresp_size\",\n            \"IntData\": 7712.59\n        },\n        {\n            \"BackupDate\": \"2024-04-17\",\n            \"Type\": \"corresp_size\",\n            \"IntData\": 7703.5\n        },\n        {\n            \"BackupDate\": \"2024-04-16\",\n            \"Type\": \"corresp_size\",\n            \"IntData\": 7698.71\n        },\n        {\n            \"BackupDate\": \"2024-04-15\",\n            \"Type\": \"corresp_size\",\n            \"IntData\": 7698.14\n        },\n        {\n            \"BackupDate\": \"2024-04-22\",\n            \"Type\": \"active_users\",\n            \"IntData\": 2791\n        },\n        {\n            \"BackupDate\": \"2024-04-21\",\n            \"Type\": \"active_users\",\n            \"IntData\": 2791\n        },\n        {\n            \"BackupDate\": \"2024-04-20\",\n            \"Type\": \"active_users\",\n            \"IntData\": 2791\n        },\n        {\n            \"BackupDate\": \"2024-04-19\",\n            \"Type\": \"active_users\",\n            \"IntData\": 2791\n        },\n        {\n            \"BackupDate\": \"2024-04-17\",\n            \"Type\": \"active_users\",\n            \"IntData\": 2791\n        },\n        {\n            \"BackupDate\": \"2024-04-16\",\n            \"Type\": \"active_users\",\n            \"IntData\": 2790\n        },\n        {\n            \"BackupDate\": \"2024-04-15\",\n            \"Type\": \"active_users\",\n            \"IntData\": 2810\n        }\n    ],\n    \"chartData\": {\n        \"GB\": [\n            {\n                \"x\": \"2024-04-22T00:00:00.000Z\",\n                \"y\": 8500.44\n            },\n            {\n                \"x\": \"2024-04-21T00:00:00.000Z\",\n                \"y\": 8498.37\n            },\n            {\n                \"x\": \"2024-04-20T00:00:00.000Z\",\n                \"y\": 8498.21\n            },\n            {\n                \"x\": \"2024-04-19T00:00:00.000Z\",\n                \"y\": 8493.12\n            },\n            {\n                \"x\": \"2024-04-17T00:00:00.000Z\",\n                \"y\": 8475.19\n            },\n            {\n                \"x\": \"2024-04-16T00:00:00.000Z\",\n                \"y\": 8468.29\n            },\n            {\n                \"x\": \"2024-04-15T00:00:00.000Z\",\n                \"y\": 8476.9\n            }\n        ],\n        \"MFCP\": [\n            {\n                \"x\": \"2024-04-22T00:00:00.000Z\",\n                \"y\": 763.76\n            },\n            {\n                \"x\": \"2024-04-21T00:00:00.000Z\",\n                \"y\": 763.76\n            },\n            {\n                \"x\": \"2024-04-20T00:00:00.000Z\",\n                \"y\": 763.77\n            },\n            {\n                \"x\": \"2024-04-19T00:00:00.000Z\",\n                \"y\": 763.64\n            },\n            {\n                \"x\": \"2024-04-17T00:00:00.000Z\",\n                \"y\": 763.36\n            },\n            {\n                \"x\": \"2024-04-16T00:00:00.000Z\",\n                \"y\": 763.21\n            },\n            {\n                \"x\": \"2024-04-15T00:00:00.000Z\",\n                \"y\": 763.54\n            }\n        ],\n        \"CO\": [\n            {\n                \"x\": \"2024-04-22T00:00:00.000Z\",\n                \"y\": 7716.7\n            },\n            {\n                \"x\": \"2024-04-21T00:00:00.000Z\",\n                \"y\": 7716.64\n            },\n            {\n                \"x\": \"2024-04-20T00:00:00.000Z\",\n                \"y\": 7716.5\n            },\n            {\n                \"x\": \"2024-04-19T00:00:00.000Z\",\n                \"y\": 7712.59\n            },\n            {\n                \"x\": \"2024-04-17T00:00:00.000Z\",\n                \"y\": 7703.5\n            },\n            {\n                \"x\": \"2024-04-16T00:00:00.000Z\",\n                \"y\": 7698.71\n            },\n            {\n                \"x\": \"2024-04-15T00:00:00.000Z\",\n                \"y\": 7698.14\n            }\n        ],\n        \"US\": [\n            {\n                \"x\": \"2024-04-22T00:00:00.000Z\",\n                \"y\": 3411\n            },\n            {\n                \"x\": \"2024-04-21T00:00:00.000Z\",\n                \"y\": 3411\n            },\n            {\n                \"x\": \"2024-04-20T00:00:00.000Z\",\n                \"y\": 3411\n            },\n            {\n                \"x\": \"2024-04-19T00:00:00.000Z\",\n                \"y\": 3411\n            },\n            {\n                \"x\": \"2024-04-17T00:00:00.000Z\",\n                \"y\": 3411\n            },\n            {\n                \"x\": \"2024-04-16T00:00:00.000Z\",\n                \"y\": 3411\n            },\n            {\n                \"x\": \"2024-04-15T00:00:00.000Z\",\n                \"y\": 3434\n            }\n        ],\n        \"ACT_US\": [\n            {\n                \"x\": \"2024-04-22T00:00:00.000Z\",\n                \"y\": 2791\n            },\n            {\n                \"x\": \"2024-04-21T00:00:00.000Z\",\n                \"y\": 2791\n            },\n            {\n                \"x\": \"2024-04-20T00:00:00.000Z\",\n                \"y\": 2791\n            },\n            {\n                \"x\": \"2024-04-19T00:00:00.000Z\",\n                \"y\": 2791\n            },\n            {\n                \"x\": \"2024-04-17T00:00:00.000Z\",\n                \"y\": 2791\n            },\n            {\n                \"x\": \"2024-04-16T00:00:00.000Z\",\n                \"y\": 2790\n            },\n            {\n                \"x\": \"2024-04-15T00:00:00.000Z\",\n                \"y\": 2810\n            }\n        ]\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Metrics",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Response status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"pm.test(\"BackupDate is in a valid date format\", function () {",
+											"    const responseData = pm.response.json();",
+											"    ",
+											"    pm.expect(responseData.data).to.be.an('array');",
+											"    responseData.data.forEach(function(item) {",
+											"        pm.expect(item.BackupDate).to.match(/^\\d{4}-\\d{2}-\\d{2}$/);",
+											"    });",
+											"});",
+											"",
+											"",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"  pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"companies\": [\r\n        \"Ang\",\r\n        \"3psy\",\r\n        \"Brouwer\"\r\n    ],\r\n    \"dates\": [45397, 45404]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/api/v1/database/metrics",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"api",
+										"v1",
+										"database",
+										"metrics"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Statistics",
+					"item": [
+						{
+							"name": "Statistics",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Response status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Response has the required fields - Date, Length, and Types\", function () {\r",
+											"    const responseData = pm.response.json();\r",
+											"    \r",
+											"    pm.expect(responseData).to.be.an('object');\r",
+											"    pm.expect(responseData).to.have.property('Date');\r",
+											"    pm.expect(responseData).to.have.property('Length');\r",
+											"    pm.expect(responseData).to.have.property('Types');\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Types array is present and contains expected number of elements\", function () {\r",
+											"  const responseData = pm.response.json();\r",
+											"  \r",
+											"  pm.expect(responseData).to.be.an('object');\r",
+											"  pm.expect(responseData.Types).to.exist;\r",
+											"  pm.expect(responseData.Types).to.be.an('array');\r",
+											"  pm.expect(responseData.Types).to.have.lengthOf(3);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Response time is less than 500ms\", function () {\r",
+											"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4000/api/v1/database/metrics/statistics",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"api",
+										"v1",
+										"database",
+										"metrics",
+										"statistics"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successful response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:4000/api/v1/database/metrics/statistics",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "4000",
+											"path": [
+												"api",
+												"v1",
+												"database",
+												"metrics",
+												"statistics"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Resource-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Origin-Agent-Cluster",
+											"value": "?1"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15552000; includeSubDomains"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-DNS-Prefetch-Control",
+											"value": "off"
+										},
+										{
+											"key": "X-Download-Options",
+											"value": "noopen"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Permitted-Cross-Domain-Policies",
+											"value": "none"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "150"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "140"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 27 May 2024 10:00:18 GMT"
+										},
+										{
+											"key": "X-RateLimit-Reset",
+											"value": "1716804558"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "148"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"94-7y6OwUqDYnTLbAlTTKJVjO84XXk\""
+										},
+										{
+											"key": "cache-control",
+											"value": "max-age=1800"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"Date\": 45404,\n    \"Length\": 232,\n    \"Types\": [\n        {\n            \"Type\": \"mfcp_size\",\n            \"Amount\": 4.5\n        },\n        {\n            \"Type\": \"database_size\",\n            \"Amount\": 50.1\n        },\n        {\n            \"Type\": \"corresp_size\",\n            \"Amount\": 45.4\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Statistics",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Response status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Response has the required fields - Date, Length, and Types\", function () {\r",
+											"    const responseData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(responseData).to.have.property('Date');\r",
+											"    pm.expect(responseData).to.have.property('Length');\r",
+											"    pm.expect(responseData).to.have.property('Types');\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Response time is less than 500ms\", function () {\r",
+											"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"companies\": [\r\n        \"Ang\",\r\n        \"3psy\",\r\n        \"Brouwer\"\r\n    ],\r\n    \"dates\": [45397, 45404]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/api/v1/database/metrics/statistics",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"api",
+										"v1",
+										"database",
+										"metrics",
+										"statistics"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successful response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"companies\": [\r\n        \"Ang\",\r\n        \"3psy\",\r\n        \"Brouwer\"\r\n    ],\r\n    \"dates\": [45397, 45404]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:4000/api/v1/database/metrics/statistics",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "4000",
+											"path": [
+												"api",
+												"v1",
+												"database",
+												"metrics",
+												"statistics"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Resource-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Origin-Agent-Cluster",
+											"value": "?1"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15552000; includeSubDomains"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-DNS-Prefetch-Control",
+											"value": "off"
+										},
+										{
+											"key": "X-Download-Options",
+											"value": "noopen"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Permitted-Cross-Domain-Policies",
+											"value": "none"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "150"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "149"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 27 May 2024 10:03:57 GMT"
+										},
+										{
+											"key": "X-RateLimit-Reset",
+											"value": "1716805138"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "146"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"92-V9iuP8XX1rY+ehZFwf7JiUhkCv4\""
+										},
+										{
+											"key": "cache-control",
+											"value": "max-age=1800"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"Date\": 45404,\n    \"Length\": 3,\n    \"Types\": [\n        {\n            \"Type\": \"mfcp_size\",\n            \"Amount\": 0.9\n        },\n        {\n            \"Type\": \"database_size\",\n            \"Amount\": 52.6\n        },\n        {\n            \"Type\": \"corresp_size\",\n            \"Amount\": 46.6\n        }\n    ]\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Week",
+					"item": [
+						{
+							"name": "Week",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Response status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Response has the required fields - BackupDate, IntData, and Type\", function () {\r",
+											"    const responseData = pm.response.json();\r",
+											"    \r",
+											"    pm.expect(responseData).to.be.an('array');\r",
+											"    \r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4000/api/v1/database/metrics/week",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"api",
+										"v1",
+										"database",
+										"metrics",
+										"week"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successful response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:4000/api/v1/database/metrics/week",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "4000",
+											"path": [
+												"api",
+												"v1",
+												"database",
+												"metrics",
+												"week"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Resource-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Origin-Agent-Cluster",
+											"value": "?1"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15552000; includeSubDomains"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-DNS-Prefetch-Control",
+											"value": "off"
+										},
+										{
+											"key": "X-Download-Options",
+											"value": "noopen"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Permitted-Cross-Domain-Policies",
+											"value": "none"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "150"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "148"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 27 May 2024 10:04:36 GMT"
+										},
+										{
+											"key": "X-RateLimit-Reset",
+											"value": "1716805138"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"85e-BiDAvSjlPWJCwC3nCWwCOA8+RnY\""
+										},
+										{
+											"key": "cache-control",
+											"value": "max-age=1800"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"BackupDate\": \"0\",\n        \"IntData\": \"10367\",\n        \"Type\": \"active_users\"\n    },\n    {\n        \"BackupDate\": \"1\",\n        \"IntData\": \"10367\",\n        \"Type\": \"active_users\"\n    },\n    {\n        \"BackupDate\": \"2\",\n        \"IntData\": \"11433\",\n        \"Type\": \"active_users\"\n    },\n    {\n        \"BackupDate\": \"3\",\n        \"IntData\": \"10444\",\n        \"Type\": \"active_users\"\n    },\n    {\n        \"BackupDate\": \"4\",\n        \"IntData\": \"10459\",\n        \"Type\": \"active_users\"\n    },\n    {\n        \"BackupDate\": \"5\",\n        \"IntData\": \"7575\",\n        \"Type\": \"active_users\"\n    },\n    {\n        \"BackupDate\": \"6\",\n        \"IntData\": \"10366\",\n        \"Type\": \"active_users\"\n    },\n    {\n        \"BackupDate\": \"0\",\n        \"IntData\": \"40168461312\",\n        \"Type\": \"corresp_size\"\n    },\n    {\n        \"BackupDate\": \"1\",\n        \"IntData\": \"40169094144\",\n        \"Type\": \"corresp_size\"\n    },\n    {\n        \"BackupDate\": \"2\",\n        \"IntData\": \"48082631680\",\n        \"Type\": \"corresp_size\"\n    },\n    {\n        \"BackupDate\": \"3\",\n        \"IntData\": \"40011783168\",\n        \"Type\": \"corresp_size\"\n    },\n    {\n        \"BackupDate\": \"4\",\n        \"IntData\": \"40097661952\",\n        \"Type\": \"corresp_size\"\n    },\n    {\n        \"BackupDate\": \"5\",\n        \"IntData\": \"32038525952\",\n        \"Type\": \"corresp_size\"\n    },\n    {\n        \"BackupDate\": \"6\",\n        \"IntData\": \"40147338240\",\n        \"Type\": \"corresp_size\"\n    },\n    {\n        \"BackupDate\": \"0\",\n        \"IntData\": \"1034684749056\",\n        \"Type\": \"database_size\"\n    },\n    {\n        \"BackupDate\": \"1\",\n        \"IntData\": \"1026565471808\",\n        \"Type\": \"database_size\"\n    },\n    {\n        \"BackupDate\": \"2\",\n        \"IntData\": \"1055533888512\",\n        \"Type\": \"database_size\"\n    },\n    {\n        \"BackupDate\": \"3\",\n        \"IntData\": \"1029074109440\",\n        \"Type\": \"database_size\"\n    },\n    {\n        \"BackupDate\": \"4\",\n        \"IntData\": \"1044317612736\",\n        \"Type\": \"database_size\"\n    },\n    {\n        \"BackupDate\": \"5\",\n        \"IntData\": \"1034741448000\",\n        \"Type\": \"database_size\"\n    },\n    {\n        \"BackupDate\": \"6\",\n        \"IntData\": \"1049405358208\",\n        \"Type\": \"database_size\"\n    },\n    {\n        \"BackupDate\": \"0\",\n        \"IntData\": \"21977488384\",\n        \"Type\": \"mfcp_size\"\n    },\n    {\n        \"BackupDate\": \"1\",\n        \"IntData\": \"21973040128\",\n        \"Type\": \"mfcp_size\"\n    },\n    {\n        \"BackupDate\": \"2\",\n        \"IntData\": \"23650562048\",\n        \"Type\": \"mfcp_size\"\n    },\n    {\n        \"BackupDate\": \"3\",\n        \"IntData\": \"21168675840\",\n        \"Type\": \"mfcp_size\"\n    },\n    {\n        \"BackupDate\": \"4\",\n        \"IntData\": \"21963452416\",\n        \"Type\": \"mfcp_size\"\n    },\n    {\n        \"BackupDate\": \"5\",\n        \"IntData\": \"21161547776\",\n        \"Type\": \"mfcp_size\"\n    },\n    {\n        \"BackupDate\": \"6\",\n        \"IntData\": \"23648988160\",\n        \"Type\": \"mfcp_size\"\n    },\n    {\n        \"BackupDate\": \"0\",\n        \"IntData\": \"13478\",\n        \"Type\": \"users\"\n    },\n    {\n        \"BackupDate\": \"1\",\n        \"IntData\": \"13478\",\n        \"Type\": \"users\"\n    },\n    {\n        \"BackupDate\": \"2\",\n        \"IntData\": \"15072\",\n        \"Type\": \"users\"\n    },\n    {\n        \"BackupDate\": \"3\",\n        \"IntData\": \"13462\",\n        \"Type\": \"users\"\n    },\n    {\n        \"BackupDate\": \"4\",\n        \"IntData\": \"13477\",\n        \"Type\": \"users\"\n    },\n    {\n        \"BackupDate\": \"5\",\n        \"IntData\": \"10066\",\n        \"Type\": \"users\"\n    },\n    {\n        \"BackupDate\": \"6\",\n        \"IntData\": \"13477\",\n        \"Type\": \"users\"\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "Week",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Response status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Response has the required fields - BackupDate, IntData, and Type\", function () {\r",
+											"    const responseData = pm.response.json();\r",
+											"    \r",
+											"    pm.expect(responseData).to.be.an('array');\r",
+											"    \r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"companies\": [\r\n        \"Ang\",\r\n        \"3psy\",\r\n        \"Brouwer\"\r\n    ],\r\n    \"dates\": [45397, 45404]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/api/v1/database/metrics/week",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"api",
+										"v1",
+										"database",
+										"metrics",
+										"week"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successful response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"companies\": [\r\n        \"Ang\",\r\n        \"3psy\",\r\n        \"Brouwer\"\r\n    ],\r\n    \"dates\": [45397, 45404]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:4000/api/v1/database/metrics/week",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "4000",
+											"path": [
+												"api",
+												"v1",
+												"database",
+												"metrics",
+												"week"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-security-policy",
+											"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+										},
+										{
+											"key": "cross-origin-opener-policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "cross-origin-resource-policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "origin-agent-cluster",
+											"value": "?1"
+										},
+										{
+											"key": "referrer-policy",
+											"value": "no-referrer"
+										},
+										{
+											"key": "strict-transport-security",
+											"value": "max-age=15552000; includeSubDomains"
+										},
+										{
+											"key": "x-content-type-options",
+											"value": "nosniff"
+										},
+										{
+											"key": "x-dns-prefetch-control",
+											"value": "off"
+										},
+										{
+											"key": "x-download-options",
+											"value": "noopen"
+										},
+										{
+											"key": "x-frame-options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "x-permitted-cross-domain-policies",
+											"value": "none"
+										},
+										{
+											"key": "x-xss-protection",
+											"value": "0"
+										},
+										{
+											"key": "x-ratelimit-limit",
+											"value": "150"
+										},
+										{
+											"key": "x-ratelimit-remaining",
+											"value": "148"
+										},
+										{
+											"key": "date",
+											"value": "Mon, 27 May 2024 10:04:36 GMT"
+										},
+										{
+											"key": "x-ratelimit-reset",
+											"value": "1716805138"
+										},
+										{
+											"key": "access-control-allow-origin",
+											"value": "*"
+										},
+										{
+											"key": "access-control-allow-credentials",
+											"value": "true"
+										},
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "etag",
+											"value": "W/\"85e-BiDAvSjlPWJCwC3nCWwCOA8+RnY\""
+										},
+										{
+											"key": "cache-control",
+											"value": "max-age=1756"
+										},
+										{
+											"key": "apicache-store",
+											"value": "memory"
+										},
+										{
+											"key": "apicache-version",
+											"value": "1.6.3"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"BackupDate\": \"0\",\n        \"IntData\": \"10367\",\n        \"Type\": \"active_users\"\n    },\n    {\n        \"BackupDate\": \"1\",\n        \"IntData\": \"10367\",\n        \"Type\": \"active_users\"\n    },\n    {\n        \"BackupDate\": \"2\",\n        \"IntData\": \"11433\",\n        \"Type\": \"active_users\"\n    },\n    {\n        \"BackupDate\": \"3\",\n        \"IntData\": \"10444\",\n        \"Type\": \"active_users\"\n    },\n    {\n        \"BackupDate\": \"4\",\n        \"IntData\": \"10459\",\n        \"Type\": \"active_users\"\n    },\n    {\n        \"BackupDate\": \"5\",\n        \"IntData\": \"7575\",\n        \"Type\": \"active_users\"\n    },\n    {\n        \"BackupDate\": \"6\",\n        \"IntData\": \"10366\",\n        \"Type\": \"active_users\"\n    },\n    {\n        \"BackupDate\": \"0\",\n        \"IntData\": \"40168461312\",\n        \"Type\": \"corresp_size\"\n    },\n    {\n        \"BackupDate\": \"1\",\n        \"IntData\": \"40169094144\",\n        \"Type\": \"corresp_size\"\n    },\n    {\n        \"BackupDate\": \"2\",\n        \"IntData\": \"48082631680\",\n        \"Type\": \"corresp_size\"\n    },\n    {\n        \"BackupDate\": \"3\",\n        \"IntData\": \"40011783168\",\n        \"Type\": \"corresp_size\"\n    },\n    {\n        \"BackupDate\": \"4\",\n        \"IntData\": \"40097661952\",\n        \"Type\": \"corresp_size\"\n    },\n    {\n        \"BackupDate\": \"5\",\n        \"IntData\": \"32038525952\",\n        \"Type\": \"corresp_size\"\n    },\n    {\n        \"BackupDate\": \"6\",\n        \"IntData\": \"40147338240\",\n        \"Type\": \"corresp_size\"\n    },\n    {\n        \"BackupDate\": \"0\",\n        \"IntData\": \"1034684749056\",\n        \"Type\": \"database_size\"\n    },\n    {\n        \"BackupDate\": \"1\",\n        \"IntData\": \"1026565471808\",\n        \"Type\": \"database_size\"\n    },\n    {\n        \"BackupDate\": \"2\",\n        \"IntData\": \"1055533888512\",\n        \"Type\": \"database_size\"\n    },\n    {\n        \"BackupDate\": \"3\",\n        \"IntData\": \"1029074109440\",\n        \"Type\": \"database_size\"\n    },\n    {\n        \"BackupDate\": \"4\",\n        \"IntData\": \"1044317612736\",\n        \"Type\": \"database_size\"\n    },\n    {\n        \"BackupDate\": \"5\",\n        \"IntData\": \"1034741448000\",\n        \"Type\": \"database_size\"\n    },\n    {\n        \"BackupDate\": \"6\",\n        \"IntData\": \"1049405358208\",\n        \"Type\": \"database_size\"\n    },\n    {\n        \"BackupDate\": \"0\",\n        \"IntData\": \"21977488384\",\n        \"Type\": \"mfcp_size\"\n    },\n    {\n        \"BackupDate\": \"1\",\n        \"IntData\": \"21973040128\",\n        \"Type\": \"mfcp_size\"\n    },\n    {\n        \"BackupDate\": \"2\",\n        \"IntData\": \"23650562048\",\n        \"Type\": \"mfcp_size\"\n    },\n    {\n        \"BackupDate\": \"3\",\n        \"IntData\": \"21168675840\",\n        \"Type\": \"mfcp_size\"\n    },\n    {\n        \"BackupDate\": \"4\",\n        \"IntData\": \"21963452416\",\n        \"Type\": \"mfcp_size\"\n    },\n    {\n        \"BackupDate\": \"5\",\n        \"IntData\": \"21161547776\",\n        \"Type\": \"mfcp_size\"\n    },\n    {\n        \"BackupDate\": \"6\",\n        \"IntData\": \"23648988160\",\n        \"Type\": \"mfcp_size\"\n    },\n    {\n        \"BackupDate\": \"0\",\n        \"IntData\": \"13478\",\n        \"Type\": \"users\"\n    },\n    {\n        \"BackupDate\": \"1\",\n        \"IntData\": \"13478\",\n        \"Type\": \"users\"\n    },\n    {\n        \"BackupDate\": \"2\",\n        \"IntData\": \"15072\",\n        \"Type\": \"users\"\n    },\n    {\n        \"BackupDate\": \"3\",\n        \"IntData\": \"13462\",\n        \"Type\": \"users\"\n    },\n    {\n        \"BackupDate\": \"4\",\n        \"IntData\": \"13477\",\n        \"Type\": \"users\"\n    },\n    {\n        \"BackupDate\": \"5\",\n        \"IntData\": \"10066\",\n        \"Type\": \"users\"\n    },\n    {\n        \"BackupDate\": \"6\",\n        \"IntData\": \"13477\",\n        \"Type\": \"users\"\n    }\n]"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Grid",
+					"item": [
+						{
+							"name": "Grid",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Response status code is 200\", function () {",
+											"  pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"  pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Response schema includes required fields - Source and Sizes\", function () {",
+											"    const responseData = pm.response.json();",
+											"",
+											"    pm.expect(responseData).to.be.an('array');",
+											"    responseData.forEach(function(item) {",
+											"        pm.expect(item).to.be.an('object');",
+											"        pm.expect(item).to.have.property('Source');",
+											"        pm.expect(item).to.have.property('Sizes');",
+											"    });",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4000/api/v1/database/metrics/grid",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"api",
+										"v1",
+										"database",
+										"metrics",
+										"grid"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successful response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:4000/api/v1/database/metrics/grid",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "4000",
+											"path": [
+												"api",
+												"v1",
+												"database",
+												"metrics",
+												"grid"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Resource-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Origin-Agent-Cluster",
+											"value": "?1"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15552000; includeSubDomains"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-DNS-Prefetch-Control",
+											"value": "off"
+										},
+										{
+											"key": "X-Download-Options",
+											"value": "noopen"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Permitted-Cross-Domain-Policies",
+											"value": "none"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "150"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "149"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 27 May 2024 10:08:54 GMT"
+										},
+										{
+											"key": "X-RateLimit-Reset",
+											"value": "1716805435"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"4b88-VRF7mySyQ9+GF1HMihMiHsD1ru4\""
+										},
+										{
+											"key": "cache-control",
+											"value": "max-age=1800"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"Source\": \"Cormac\",\n        \"Sizes\": {\n            \"GB\": 9.96,\n            \"MFCP\": 0.58,\n            \"CO\": 9.31,\n            \"US\": 4,\n            \"ACT_US\": 4\n        }\n    },\n    {\n        \"Source\": \"Corporatetrailer\",\n        \"Sizes\": {\n            \"GB\": 42.86,\n            \"MFCP\": 0.63,\n            \"CO\": 39.85,\n            \"US\": 20,\n            \"ACT_US\": 20\n        }\n    },\n    {\n        \"Source\": \"CRMConsultants\",\n        \"Sizes\": {\n            \"GB\": 18.25,\n            \"MFCP\": 2.95,\n            \"CO\": 12.29,\n            \"US\": 25,\n            \"ACT_US\": 8\n        }\n    },\n    {\n        \"Source\": \"CROW\",\n        \"Sizes\": {\n            \"GB\": 5.63,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 13,\n            \"ACT_US\": 13\n        }\n    },\n    {\n        \"Source\": \"Cuprochimique\",\n        \"Sizes\": {\n            \"GB\": 9.2,\n            \"MFCP\": 0,\n            \"CO\": 7.43,\n            \"US\": 7,\n            \"ACT_US\": 7\n        }\n    },\n    {\n        \"Source\": \"dcws\",\n        \"Sizes\": {\n            \"GB\": 10.24,\n            \"MFCP\": 0,\n            \"CO\": 1.94,\n            \"US\": 120,\n            \"ACT_US\": 110\n        }\n    },\n    {\n        \"Source\": \"DeGraaff\",\n        \"Sizes\": {\n            \"GB\": 18.9,\n            \"MFCP\": 0.68,\n            \"CO\": 17.39,\n            \"US\": 9,\n            \"ACT_US\": 9\n        }\n    },\n    {\n        \"Source\": \"Cooper\",\n        \"Sizes\": {\n            \"GB\": 63.97,\n            \"MFCP\": 4.33,\n            \"CO\": 62.62,\n            \"US\": 4,\n            \"ACT_US\": 4\n        }\n    },\n    {\n        \"Source\": \"Commercieelnederland\",\n        \"Sizes\": {\n            \"GB\": 0.22,\n            \"MFCP\": 0,\n            \"CO\": 0.01,\n            \"US\": 3,\n            \"ACT_US\": 2\n        }\n    },\n    {\n        \"Source\": \"Combister\",\n        \"Sizes\": {\n            \"GB\": 0.12,\n            \"MFCP\": 0,\n            \"CO\": 0.05,\n            \"US\": 5,\n            \"ACT_US\": 5\n        }\n    },\n    {\n        \"Source\": \"CLSTex\",\n        \"Sizes\": {\n            \"GB\": 0.12,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 3,\n            \"ACT_US\": 3\n        }\n    },\n    {\n        \"Source\": \"Clok\",\n        \"Sizes\": {\n            \"GB\": 4.01,\n            \"MFCP\": 0.48,\n            \"CO\": 2.29,\n            \"US\": 16,\n            \"ACT_US\": 16\n        }\n    },\n    {\n        \"Source\": \"Climaways\",\n        \"Sizes\": {\n            \"GB\": 33,\n            \"MFCP\": 2.9,\n            \"CO\": 27.99,\n            \"US\": 5,\n            \"ACT_US\": 5\n        }\n    },\n    {\n        \"Source\": \"Ckabclsk\",\n        \"Sizes\": {\n            \"GB\": 1.11,\n            \"MFCP\": 0.01,\n            \"CO\": 0.08,\n            \"US\": 20,\n            \"ACT_US\": 16\n        }\n    },\n    {\n        \"Source\": \"Cefina\",\n        \"Sizes\": {\n            \"GB\": 3.33,\n            \"MFCP\": 0.57,\n            \"CO\": 2.64,\n            \"US\": 3,\n            \"ACT_US\": 3\n        }\n    },\n    {\n        \"Source\": \"Cavalier\",\n        \"Sizes\": {\n            \"GB\": 3.33,\n            \"MFCP\": 0,\n            \"CO\": 3.14,\n            \"US\": 5,\n            \"ACT_US\": 5\n        }\n    },\n    {\n        \"Source\": \"Callista\",\n        \"Sizes\": {\n            \"GB\": 0.12,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 5,\n            \"ACT_US\": 3\n        }\n    },\n    {\n        \"Source\": \"Butcherscraft\",\n        \"Sizes\": {\n            \"GB\": 0.12,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 7,\n            \"ACT_US\": 7\n        }\n    },\n    {\n        \"Source\": \"btg\",\n        \"Sizes\": {\n            \"GB\": 7.89,\n            \"MFCP\": 0.05,\n            \"CO\": 6.12,\n            \"US\": 4,\n            \"ACT_US\": 4\n        }\n    },\n    {\n        \"Source\": \"Brouwer\",\n        \"Sizes\": {\n            \"GB\": 633.21,\n            \"MFCP\": 0.05,\n            \"CO\": 561.49,\n            \"US\": 10,\n            \"ACT_US\": 10\n        }\n    },\n    {\n        \"Source\": \"BreukerTelemarketing\",\n        \"Sizes\": {\n            \"GB\": 2.03,\n            \"MFCP\": 0,\n            \"CO\": 0.11,\n            \"US\": 5,\n            \"ACT_US\": 5\n        }\n    },\n    {\n        \"Source\": \"BPI\",\n        \"Sizes\": {\n            \"GB\": 86.78,\n            \"MFCP\": 5.63,\n            \"CO\": 67.13,\n            \"US\": 9,\n            \"ACT_US\": 9\n        }\n    },\n    {\n        \"Source\": \"Bosincasso\",\n        \"Sizes\": {\n            \"GB\": 21.03,\n            \"MFCP\": 8.11,\n            \"CO\": 18.49,\n            \"US\": 7,\n            \"ACT_US\": 7\n        }\n    },\n    {\n        \"Source\": \"Boitenluhrs\",\n        \"Sizes\": {\n            \"GB\": 1.06,\n            \"MFCP\": 0.31,\n            \"CO\": 0.91,\n            \"US\": 4,\n            \"ACT_US\": 4\n        }\n    },\n    {\n        \"Source\": \"Bnpelektromotoren\",\n        \"Sizes\": {\n            \"GB\": 7.4,\n            \"MFCP\": 0,\n            \"CO\": 6.55,\n            \"US\": 6,\n            \"ACT_US\": 6\n        }\n    },\n    {\n        \"Source\": \"Bloematelierroos\",\n        \"Sizes\": {\n            \"GB\": 0.31,\n            \"MFCP\": 0,\n            \"CO\": 0.13,\n            \"US\": 2,\n            \"ACT_US\": 2\n        }\n    },\n    {\n        \"Source\": \"Best-Matic\",\n        \"Sizes\": {\n            \"GB\": 16.73,\n            \"MFCP\": 0.27,\n            \"CO\": 14.61,\n            \"US\": 9,\n            \"ACT_US\": 9\n        }\n    },\n    {\n        \"Source\": \"B-Close\",\n        \"Sizes\": {\n            \"GB\": 80.3,\n            \"MFCP\": 0.71,\n            \"CO\": 76.61,\n            \"US\": 56,\n            \"ACT_US\": 55\n        }\n    },\n    {\n        \"Source\": \"Barmen\",\n        \"Sizes\": {\n            \"GB\": 0.69,\n            \"MFCP\": 0,\n            \"CO\": 0.47,\n            \"US\": 2,\n            \"ACT_US\": 2\n        }\n    },\n    {\n        \"Source\": \"BalansSchoonmaak\",\n        \"Sizes\": {\n            \"GB\": 0.12,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 2,\n            \"ACT_US\": 2\n        }\n    },\n    {\n        \"Source\": \"BakkerClients\",\n        \"Sizes\": {\n            \"GB\": 37.74,\n            \"MFCP\": 1.31,\n            \"CO\": 35.35,\n            \"US\": 2,\n            \"ACT_US\": 2\n        }\n    },\n    {\n        \"Source\": \"AutoHalan\",\n        \"Sizes\": {\n            \"GB\": 108.54,\n            \"MFCP\": 2.33,\n            \"CO\": 105.83,\n            \"US\": 12,\n            \"ACT_US\": 12\n        }\n    },\n    {\n        \"Source\": \"Atlantic\",\n        \"Sizes\": {\n            \"GB\": 170.63,\n            \"MFCP\": 78.96,\n            \"CO\": 136.16,\n            \"US\": 51,\n            \"ACT_US\": 51\n        }\n    },\n    {\n        \"Source\": \"Ataraxio\",\n        \"Sizes\": {\n            \"GB\": 0.54,\n            \"MFCP\": 0,\n            \"CO\": 0.38,\n            \"US\": 2,\n            \"ACT_US\": 1\n        }\n    },\n    {\n        \"Source\": \"Aswitch\",\n        \"Sizes\": {\n            \"GB\": 24.77,\n            \"MFCP\": 3.14,\n            \"CO\": 23.36,\n            \"US\": 4,\n            \"ACT_US\": 4\n        }\n    },\n    {\n        \"Source\": \"Asona\",\n        \"Sizes\": {\n            \"GB\": 77.62,\n            \"MFCP\": 1.69,\n            \"CO\": 74.77,\n            \"US\": 2,\n            \"ACT_US\": 2\n        }\n    },\n    {\n        \"Source\": \"ArchieEuropeUTF8\",\n        \"Sizes\": {\n            \"GB\": 147.63,\n            \"MFCP\": 13.42,\n            \"CO\": 134.82,\n            \"US\": 100,\n            \"ACT_US\": 50\n        }\n    },\n    {\n        \"Source\": \"Arcabo\",\n        \"Sizes\": {\n            \"GB\": 49.28,\n            \"MFCP\": 1.91,\n            \"CO\": 46.51,\n            \"US\": 14,\n            \"ACT_US\": 14\n        }\n    },\n    {\n        \"Source\": \"A-Point\",\n        \"Sizes\": {\n            \"GB\": 1.42,\n            \"MFCP\": 0.08,\n            \"CO\": 0.01,\n            \"US\": 25,\n            \"ACT_US\": 25\n        }\n    },\n    {\n        \"Source\": \"Ang\",\n        \"Sizes\": {\n            \"GB\": 19.93,\n            \"MFCP\": 10.85,\n            \"CO\": 17.21,\n            \"US\": 8,\n            \"ACT_US\": 8\n        }\n    },\n    {\n        \"Source\": \"Alvadela\",\n        \"Sizes\": {\n            \"GB\": 2.21,\n            \"MFCP\": 0.14,\n            \"CO\": 1.93,\n            \"US\": 1,\n            \"ACT_US\": 1\n        }\n    },\n    {\n        \"Source\": \"Allshoes\",\n        \"Sizes\": {\n            \"GB\": 89.92,\n            \"MFCP\": 7.73,\n            \"CO\": 87.59,\n            \"US\": 14,\n            \"ACT_US\": 12\n        }\n    },\n    {\n        \"Source\": \"Allfo\",\n        \"Sizes\": {\n            \"GB\": 4.55,\n            \"MFCP\": 0.11,\n            \"CO\": 3.48,\n            \"US\": 8,\n            \"ACT_US\": 8\n        }\n    },\n    {\n        \"Source\": \"Alexmanagementsupport\",\n        \"Sizes\": {\n            \"GB\": 0.03,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 1,\n            \"ACT_US\": 1\n        }\n    },\n    {\n        \"Source\": \"Aginotten\",\n        \"Sizes\": {\n            \"GB\": 0.31,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 2,\n            \"ACT_US\": 2\n        }\n    },\n    {\n        \"Source\": \"Acquiremedia\",\n        \"Sizes\": {\n            \"GB\": 53.93,\n            \"MFCP\": 0.55,\n            \"CO\": 51.06,\n            \"US\": 10,\n            \"ACT_US\": 10\n        }\n    },\n    {\n        \"Source\": \"AAS\",\n        \"Sizes\": {\n            \"GB\": 25.4,\n            \"MFCP\": 0.22,\n            \"CO\": 23.07,\n            \"US\": 14,\n            \"ACT_US\": 14\n        }\n    },\n    {\n        \"Source\": \"3psy\",\n        \"Sizes\": {\n            \"GB\": 2.62,\n            \"MFCP\": 0.1,\n            \"CO\": 2.1,\n            \"US\": 3,\n            \"ACT_US\": 3\n        }\n    },\n    {\n        \"Source\": \"Dentmed\",\n        \"Sizes\": {\n            \"GB\": 27.87,\n            \"MFCP\": 0.63,\n            \"CO\": 26.29,\n            \"US\": 9,\n            \"ACT_US\": 9\n        }\n    },\n    {\n        \"Source\": \"Distritech\",\n        \"Sizes\": {\n            \"GB\": 70.51,\n            \"MFCP\": 9.08,\n            \"CO\": 62.07,\n            \"US\": 10,\n            \"ACT_US\": 10\n        }\n    },\n    {\n        \"Source\": \"D-Max\",\n        \"Sizes\": {\n            \"GB\": 12.01,\n            \"MFCP\": 0.48,\n            \"CO\": 3.77,\n            \"US\": 21,\n            \"ACT_US\": 21\n        }\n    },\n    {\n        \"Source\": \"DMO\",\n        \"Sizes\": {\n            \"GB\": 0.07,\n            \"MFCP\": 0.13,\n            \"CO\": 0.01,\n            \"US\": 350,\n            \"ACT_US\": 73\n        }\n    },\n    {\n        \"Source\": \"Drie-d\",\n        \"Sizes\": {\n            \"GB\": 1.79,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 20,\n            \"ACT_US\": 20\n        }\n    },\n    {\n        \"Source\": \"Drisag\",\n        \"Sizes\": {\n            \"GB\": 91.78,\n            \"MFCP\": 1.03,\n            \"CO\": 90.11,\n            \"US\": 24,\n            \"ACT_US\": 24\n        }\n    },\n    {\n        \"Source\": \"Dusch\",\n        \"Sizes\": {\n            \"GB\": 95.57,\n            \"MFCP\": 7.29,\n            \"CO\": 87.12,\n            \"US\": 4,\n            \"ACT_US\": 4\n        }\n    },\n    {\n        \"Source\": \"Dustcontrol\",\n        \"Sizes\": {\n            \"GB\": 118.07,\n            \"MFCP\": 12.21,\n            \"CO\": 107.59,\n            \"US\": 9,\n            \"ACT_US\": 9\n        }\n    },\n    {\n        \"Source\": \"Echt-susteren\",\n        \"Sizes\": {\n            \"GB\": 0.21,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 2,\n            \"ACT_US\": 2\n        }\n    },\n    {\n        \"Source\": \"Efcon\",\n        \"Sizes\": {\n            \"GB\": 38.49,\n            \"MFCP\": 1.05,\n            \"CO\": 36.83,\n            \"US\": 7,\n            \"ACT_US\": 7\n        }\n    },\n    {\n        \"Source\": \"Eliet\",\n        \"Sizes\": {\n            \"GB\": 2.84,\n            \"MFCP\": 0,\n            \"CO\": 0.01,\n            \"US\": 11,\n            \"ACT_US\": 11\n        }\n    },\n    {\n        \"Source\": \"Energyra\",\n        \"Sizes\": {\n            \"GB\": 1.03,\n            \"MFCP\": 0,\n            \"CO\": 0.86,\n            \"US\": 7,\n            \"ACT_US\": 7\n        }\n    },\n    {\n        \"Source\": \"Epaccountancy\",\n        \"Sizes\": {\n            \"GB\": 0.23,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 4,\n            \"ACT_US\": 3\n        }\n    },\n    {\n        \"Source\": \"Equi\",\n        \"Sizes\": {\n            \"GB\": 19.92,\n            \"MFCP\": 0.04,\n            \"CO\": 17.88,\n            \"US\": 5,\n            \"ACT_US\": 5\n        }\n    },\n    {\n        \"Source\": \"Essange-A\",\n        \"Sizes\": {\n            \"GB\": 87.81,\n            \"MFCP\": 1.44,\n            \"CO\": 82.07,\n            \"US\": 24,\n            \"ACT_US\": 24\n        }\n    },\n    {\n        \"Source\": \"Essange-P\",\n        \"Sizes\": {\n            \"GB\": 95.04,\n            \"MFCP\": 1.44,\n            \"CO\": 89.54,\n            \"US\": 24,\n            \"ACT_US\": 24\n        }\n    },\n    {\n        \"Source\": \"Estinea\",\n        \"Sizes\": {\n            \"GB\": 1.15,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 10,\n            \"ACT_US\": 10\n        }\n    },\n    {\n        \"Source\": \"Etepro\",\n        \"Sizes\": {\n            \"GB\": 2.12,\n            \"MFCP\": 0.02,\n            \"CO\": 1.92,\n            \"US\": 14,\n            \"ACT_US\": 14\n        }\n    },\n    {\n        \"Source\": \"Europair\",\n        \"Sizes\": {\n            \"GB\": 10.28,\n            \"MFCP\": 0,\n            \"CO\": 9.88,\n            \"US\": 4,\n            \"ACT_US\": 4\n        }\n    },\n    {\n        \"Source\": \"Fairmedia\",\n        \"Sizes\": {\n            \"GB\": 0.07,\n            \"MFCP\": 0,\n            \"CO\": 0.02,\n            \"US\": 1,\n            \"ACT_US\": 1\n        }\n    },\n    {\n        \"Source\": \"Febe\",\n        \"Sizes\": {\n            \"GB\": 6.11,\n            \"MFCP\": 0.36,\n            \"CO\": 5.48,\n            \"US\": 8,\n            \"ACT_US\": 8\n        }\n    },\n    {\n        \"Source\": \"Fidet\",\n        \"Sizes\": {\n            \"GB\": 1.29,\n            \"MFCP\": 0.78,\n            \"CO\": 0.25,\n            \"US\": 10,\n            \"ACT_US\": 10\n        }\n    },\n    {\n        \"Source\": \"Fortop\",\n        \"Sizes\": {\n            \"GB\": 462.7,\n            \"MFCP\": 0,\n            \"CO\": 452.31,\n            \"US\": 66,\n            \"ACT_US\": 66\n        }\n    },\n    {\n        \"Source\": \"Funha\",\n        \"Sizes\": {\n            \"GB\": 3.59,\n            \"MFCP\": 40.71,\n            \"CO\": 1.28,\n            \"US\": 15,\n            \"ACT_US\": 15\n        }\n    },\n    {\n        \"Source\": \"FVO\",\n        \"Sizes\": {\n            \"GB\": 29.49,\n            \"MFCP\": 2.61,\n            \"CO\": 26.24,\n            \"US\": 5,\n            \"ACT_US\": 5\n        }\n    },\n    {\n        \"Source\": \"Gamaco\",\n        \"Sizes\": {\n            \"GB\": 12.72,\n            \"MFCP\": 0,\n            \"CO\": 11.35,\n            \"US\": 5,\n            \"ACT_US\": 5\n        }\n    },\n    {\n        \"Source\": \"Gardnerdenver\",\n        \"Sizes\": {\n            \"GB\": 47.95,\n            \"MFCP\": 0.04,\n            \"CO\": 45.59,\n            \"US\": 30,\n            \"ACT_US\": 24\n        }\n    },\n    {\n        \"Source\": \"Gemeentealmelo\",\n        \"Sizes\": {\n            \"GB\": 0.05,\n            \"MFCP\": 0.01,\n            \"CO\": 0,\n            \"US\": 6,\n            \"ACT_US\": 5\n        }\n    },\n    {\n        \"Source\": \"GemeenteDeventer\",\n        \"Sizes\": {\n            \"GB\": 63.08,\n            \"MFCP\": 0.93,\n            \"CO\": 30.66,\n            \"US\": 30,\n            \"ACT_US\": 20\n        }\n    },\n    {\n        \"Source\": \"Gemeenteepe\",\n        \"Sizes\": {\n            \"GB\": 0.96,\n            \"MFCP\": 0,\n            \"CO\": 0.77,\n            \"US\": 6,\n            \"ACT_US\": 6\n        }\n    },\n    {\n        \"Source\": \"Gemeentekampen\",\n        \"Sizes\": {\n            \"GB\": 0.11,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 10,\n            \"ACT_US\": 10\n        }\n    },\n    {\n        \"Source\": \"GemeenteNieuwegein\",\n        \"Sizes\": {\n            \"GB\": 32.28,\n            \"MFCP\": 0.1,\n            \"CO\": 31.32,\n            \"US\": 3,\n            \"ACT_US\": 3\n        }\n    },\n    {\n        \"Source\": \"Gemeentepurmerend\",\n        \"Sizes\": {\n            \"GB\": 3.95,\n            \"MFCP\": 0.02,\n            \"CO\": 3.63,\n            \"US\": 6,\n            \"ACT_US\": 5\n        }\n    },\n    {\n        \"Source\": \"GemeenteRhenen\",\n        \"Sizes\": {\n            \"GB\": 0.22,\n            \"MFCP\": 0,\n            \"CO\": 0.02,\n            \"US\": 4,\n            \"ACT_US\": 4\n        }\n    },\n    {\n        \"Source\": \"Gemeenteveenendaal\",\n        \"Sizes\": {\n            \"GB\": 0.58,\n            \"MFCP\": 0,\n            \"CO\": 0.2,\n            \"US\": 9,\n            \"ACT_US\": 9\n        }\n    },\n    {\n        \"Source\": \"Gemeentewestland\",\n        \"Sizes\": {\n            \"GB\": 0.13,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 10,\n            \"ACT_US\": 10\n        }\n    },\n    {\n        \"Source\": \"Gemeentezutphen\",\n        \"Sizes\": {\n            \"GB\": 0.04,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 15,\n            \"ACT_US\": 15\n        }\n    },\n    {\n        \"Source\": \"Getra\",\n        \"Sizes\": {\n            \"GB\": 80.49,\n            \"MFCP\": 1.89,\n            \"CO\": 76.75,\n            \"US\": 25,\n            \"ACT_US\": 25\n        }\n    },\n    {\n        \"Source\": \"Giacomini\",\n        \"Sizes\": {\n            \"GB\": 89.79,\n            \"MFCP\": 192.71,\n            \"CO\": 85.56,\n            \"US\": 21,\n            \"ACT_US\": 21\n        }\n    },\n    {\n        \"Source\": \"Girasole\",\n        \"Sizes\": {\n            \"GB\": 0.24,\n            \"MFCP\": 0.01,\n            \"CO\": 0.14,\n            \"US\": 1,\n            \"ACT_US\": 1\n        }\n    },\n    {\n        \"Source\": \"Goededoelennederland\",\n        \"Sizes\": {\n            \"GB\": 48.04,\n            \"MFCP\": 1.26,\n            \"CO\": 35.09,\n            \"US\": 22,\n            \"ACT_US\": 22\n        }\n    },\n    {\n        \"Source\": \"Goesting\",\n        \"Sizes\": {\n            \"GB\": 54.45,\n            \"MFCP\": 0.12,\n            \"CO\": 48.99,\n            \"US\": 5,\n            \"ACT_US\": 4\n        }\n    },\n    {\n        \"Source\": \"Gst\",\n        \"Sizes\": {\n            \"GB\": 66.69,\n            \"MFCP\": 6.06,\n            \"CO\": 60.53,\n            \"US\": 24,\n            \"ACT_US\": 24\n        }\n    },\n    {\n        \"Source\": \"GWSDSN\",\n        \"Sizes\": {\n            \"GB\": 7.25,\n            \"MFCP\": 0.25,\n            \"CO\": 6.75,\n            \"US\": 12,\n            \"ACT_US\": 12\n        }\n    },\n    {\n        \"Source\": \"Habeco\",\n        \"Sizes\": {\n            \"GB\": 12.47,\n            \"MFCP\": 0.68,\n            \"CO\": 7.61,\n            \"US\": 27,\n            \"ACT_US\": 26\n        }\n    },\n    {\n        \"Source\": \"Hanl\",\n        \"Sizes\": {\n            \"GB\": 0.13,\n            \"MFCP\": 0.05,\n            \"CO\": 0.03,\n            \"US\": 6,\n            \"ACT_US\": 6\n        }\n    },\n    {\n        \"Source\": \"Hannibal\",\n        \"Sizes\": {\n            \"GB\": 0.1,\n            \"MFCP\": 0.05,\n            \"CO\": 0,\n            \"US\": 5,\n            \"ACT_US\": 5\n        }\n    },\n    {\n        \"Source\": \"Hans-Bart\",\n        \"Sizes\": {\n            \"GB\": 0.12,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 5,\n            \"ACT_US\": 2\n        }\n    },\n    {\n        \"Source\": \"Hetklantenbedrijf\",\n        \"Sizes\": {\n            \"GB\": 3.79,\n            \"MFCP\": 0.03,\n            \"CO\": 3.19,\n            \"US\": 2,\n            \"ACT_US\": 2\n        }\n    },\n    {\n        \"Source\": \"Hilaire\",\n        \"Sizes\": {\n            \"GB\": 12.75,\n            \"MFCP\": 0.02,\n            \"CO\": 10.19,\n            \"US\": 25,\n            \"ACT_US\": 25\n        }\n    },\n    {\n        \"Source\": \"HIVMonitoring\",\n        \"Sizes\": {\n            \"GB\": 0.96,\n            \"MFCP\": 0.08,\n            \"CO\": 0.75,\n            \"US\": 4,\n            \"ACT_US\": 4\n        }\n    },\n    {\n        \"Source\": \"Hollandhouse\",\n        \"Sizes\": {\n            \"GB\": 4.64,\n            \"MFCP\": 0,\n            \"CO\": 3.51,\n            \"US\": 3,\n            \"ACT_US\": 3\n        }\n    },\n    {\n        \"Source\": \"Hollarts\",\n        \"Sizes\": {\n            \"GB\": 19.25,\n            \"MFCP\": 0.36,\n            \"CO\": 18.57,\n            \"US\": 4,\n            \"ACT_US\": 4\n        }\n    },\n    {\n        \"Source\": \"Hollenberg\",\n        \"Sizes\": {\n            \"GB\": 2.98,\n            \"MFCP\": 0.13,\n            \"CO\": 2.47,\n            \"US\": 10,\n            \"ACT_US\": 6\n        }\n    },\n    {\n        \"Source\": \"Hoppecke\",\n        \"Sizes\": {\n            \"GB\": 6.35,\n            \"MFCP\": 0.05,\n            \"CO\": 1.94,\n            \"US\": 23,\n            \"ACT_US\": 23\n        }\n    },\n    {\n        \"Source\": \"HoppeckeSAS\",\n        \"Sizes\": {\n            \"GB\": 1.72,\n            \"MFCP\": 0,\n            \"CO\": 0.15,\n            \"US\": 14,\n            \"ACT_US\": 10\n        }\n    },\n    {\n        \"Source\": \"HRLS\",\n        \"Sizes\": {\n            \"GB\": 1.73,\n            \"MFCP\": 0,\n            \"CO\": 1.37,\n            \"US\": 2,\n            \"ACT_US\": 2\n        }\n    },\n    {\n        \"Source\": \"hv1854\",\n        \"Sizes\": {\n            \"GB\": 26.1,\n            \"MFCP\": 0.38,\n            \"CO\": 25.35,\n            \"US\": 4,\n            \"ACT_US\": 2\n        }\n    },\n    {\n        \"Source\": \"Ijsselcoatings\",\n        \"Sizes\": {\n            \"GB\": 6.98,\n            \"MFCP\": 2.41,\n            \"CO\": 4.17,\n            \"US\": 15,\n            \"ACT_US\": 15\n        }\n    },\n    {\n        \"Source\": \"Ij-taxaties\",\n        \"Sizes\": {\n            \"GB\": 4.37,\n            \"MFCP\": 0.24,\n            \"CO\": 3.95,\n            \"US\": 4,\n            \"ACT_US\": 4\n        }\n    },\n    {\n        \"Source\": \"Intercel\",\n        \"Sizes\": {\n            \"GB\": 114.68,\n            \"MFCP\": 2.37,\n            \"CO\": 106.72,\n            \"US\": 29,\n            \"ACT_US\": 29\n        }\n    },\n    {\n        \"Source\": \"Intrawood\",\n        \"Sizes\": {\n            \"GB\": 9.53,\n            \"MFCP\": 0.08,\n            \"CO\": 7.81,\n            \"US\": 2,\n            \"ACT_US\": 2\n        }\n    },\n    {\n        \"Source\": \"Ista\",\n        \"Sizes\": {\n            \"GB\": 21.3,\n            \"MFCP\": 14.08,\n            \"CO\": 17.19,\n            \"US\": 13,\n            \"ACT_US\": 13\n        }\n    },\n    {\n        \"Source\": \"Itolang\",\n        \"Sizes\": {\n            \"GB\": 1.2,\n            \"MFCP\": 0.01,\n            \"CO\": 0.71,\n            \"US\": 10,\n            \"ACT_US\": 10\n        }\n    },\n    {\n        \"Source\": \"Jansen\",\n        \"Sizes\": {\n            \"GB\": 56.57,\n            \"MFCP\": 9.23,\n            \"CO\": 54.03,\n            \"US\": 25,\n            \"ACT_US\": 25\n        }\n    },\n    {\n        \"Source\": \"jeanmineur\",\n        \"Sizes\": {\n            \"GB\": 27.48,\n            \"MFCP\": 0,\n            \"CO\": 26.47,\n            \"US\": 10,\n            \"ACT_US\": 10\n        }\n    },\n    {\n        \"Source\": \"Jermayo\",\n        \"Sizes\": {\n            \"GB\": 1.49,\n            \"MFCP\": 0.04,\n            \"CO\": 0.85,\n            \"US\": 8,\n            \"ACT_US\": 8\n        }\n    },\n    {\n        \"Source\": \"Jonkmanmelchers\",\n        \"Sizes\": {\n            \"GB\": 3.36,\n            \"MFCP\": 0,\n            \"CO\": 2.88,\n            \"US\": 5,\n            \"ACT_US\": 5\n        }\n    },\n    {\n        \"Source\": \"Joodshospiceimmanuel\",\n        \"Sizes\": {\n            \"GB\": 0.68,\n            \"MFCP\": 0.14,\n            \"CO\": 0.45,\n            \"US\": 3,\n            \"ACT_US\": 3\n        }\n    },\n    {\n        \"Source\": \"Jopen\",\n        \"Sizes\": {\n            \"GB\": 66.43,\n            \"MFCP\": 1.12,\n            \"CO\": 62.43,\n            \"US\": 21,\n            \"ACT_US\": 21\n        }\n    },\n    {\n        \"Source\": \"JoyInCare\",\n        \"Sizes\": {\n            \"GB\": 209.01,\n            \"MFCP\": 8.84,\n            \"CO\": 197.41,\n            \"US\": 21,\n            \"ACT_US\": 20\n        }\n    },\n    {\n        \"Source\": \"KeyMacUTF8\",\n        \"Sizes\": {\n            \"GB\": 27.99,\n            \"MFCP\": 0.74,\n            \"CO\": 24.54,\n            \"US\": 119,\n            \"ACT_US\": 119\n        }\n    },\n    {\n        \"Source\": \"Kleen\",\n        \"Sizes\": {\n            \"GB\": 20.11,\n            \"MFCP\": 0.56,\n            \"CO\": 19.28,\n            \"US\": 11,\n            \"ACT_US\": 9\n        }\n    },\n    {\n        \"Source\": \"Kunstmuseum\",\n        \"Sizes\": {\n            \"GB\": 31.31,\n            \"MFCP\": 0,\n            \"CO\": 2.13,\n            \"US\": 21,\n            \"ACT_US\": 21\n        }\n    },\n    {\n        \"Source\": \"KVA\",\n        \"Sizes\": {\n            \"GB\": 41.55,\n            \"MFCP\": 9.69,\n            \"CO\": 38.81,\n            \"US\": 5,\n            \"ACT_US\": 5\n        }\n    },\n    {\n        \"Source\": \"Kwrexergie\",\n        \"Sizes\": {\n            \"GB\": 1.94,\n            \"MFCP\": 25.41,\n            \"CO\": 1.64,\n            \"US\": 3,\n            \"ACT_US\": 3\n        }\n    },\n    {\n        \"Source\": \"L1\",\n        \"Sizes\": {\n            \"GB\": 155.15,\n            \"MFCP\": 72.69,\n            \"CO\": 149.97,\n            \"US\": 2,\n            \"ACT_US\": 2\n        }\n    },\n    {\n        \"Source\": \"Landvanons\",\n        \"Sizes\": {\n            \"GB\": 13.39,\n            \"MFCP\": 0.2,\n            \"CO\": 12.31,\n            \"US\": 30,\n            \"ACT_US\": 30\n        }\n    },\n    {\n        \"Source\": \"Leadinfo\",\n        \"Sizes\": {\n            \"GB\": 0.11,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 5,\n            \"ACT_US\": 4\n        }\n    },\n    {\n        \"Source\": \"Lindus\",\n        \"Sizes\": {\n            \"GB\": 32.49,\n            \"MFCP\": 2.42,\n            \"CO\": 24.28,\n            \"US\": 5,\n            \"ACT_US\": 4\n        }\n    },\n    {\n        \"Source\": \"Locatus\",\n        \"Sizes\": {\n            \"GB\": 125.6,\n            \"MFCP\": 1.41,\n            \"CO\": 122.29,\n            \"US\": 18,\n            \"ACT_US\": 18\n        }\n    },\n    {\n        \"Source\": \"Ludo\",\n        \"Sizes\": {\n            \"GB\": 81.35,\n            \"MFCP\": 3.31,\n            \"CO\": 74.65,\n            \"US\": 1,\n            \"ACT_US\": 1\n        }\n    },\n    {\n        \"Source\": \"Maasgouw\",\n        \"Sizes\": {\n            \"GB\": 0.11,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 3,\n            \"ACT_US\": 2\n        }\n    },\n    {\n        \"Source\": \"MagnaVersum\",\n        \"Sizes\": {\n            \"GB\": 0.49,\n            \"MFCP\": 0.94,\n            \"CO\": 0.29,\n            \"US\": 4,\n            \"ACT_US\": 4\n        }\n    },\n    {\n        \"Source\": \"MBTPolymers\",\n        \"Sizes\": {\n            \"GB\": 12.82,\n            \"MFCP\": 0.03,\n            \"CO\": 11.47,\n            \"US\": 5,\n            \"ACT_US\": 5\n        }\n    },\n    {\n        \"Source\": \"Megamagazijn\",\n        \"Sizes\": {\n            \"GB\": 9.08,\n            \"MFCP\": 0,\n            \"CO\": 8.84,\n            \"US\": 5,\n            \"ACT_US\": 5\n        }\n    },\n    {\n        \"Source\": \"Merrem\",\n        \"Sizes\": {\n            \"GB\": 8.7,\n            \"MFCP\": 14.88,\n            \"CO\": 8.01,\n            \"US\": 8,\n            \"ACT_US\": 8\n        }\n    },\n    {\n        \"Source\": \"mkbvrienden\",\n        \"Sizes\": {\n            \"GB\": 8.54,\n            \"MFCP\": 0.04,\n            \"CO\": 5.61,\n            \"US\": 2,\n            \"ACT_US\": 2\n        }\n    },\n    {\n        \"Source\": \"MLSO\",\n        \"Sizes\": {\n            \"GB\": 0.2,\n            \"MFCP\": 0,\n            \"CO\": 0.01,\n            \"US\": 16,\n            \"ACT_US\": 16\n        }\n    },\n    {\n        \"Source\": \"Mooijmanmarketing\",\n        \"Sizes\": {\n            \"GB\": 70.59,\n            \"MFCP\": 0.61,\n            \"CO\": 67.32,\n            \"US\": 2,\n            \"ACT_US\": 2\n        }\n    },\n    {\n        \"Source\": \"mooijmanmedia\",\n        \"Sizes\": {\n            \"GB\": 5.5,\n            \"MFCP\": 0,\n            \"CO\": 4.57,\n            \"US\": 1,\n            \"ACT_US\": 1\n        }\n    },\n    {\n        \"Source\": \"MTinternational\",\n        \"Sizes\": {\n            \"GB\": 23.5,\n            \"MFCP\": 0.01,\n            \"CO\": 22.88,\n            \"US\": 2,\n            \"ACT_US\": 2\n        }\n    },\n    {\n        \"Source\": \"Multiinstruments\",\n        \"Sizes\": {\n            \"GB\": 18.36,\n            \"MFCP\": 0.24,\n            \"CO\": 17.67,\n            \"US\": 5,\n            \"ACT_US\": 5\n        }\n    },\n    {\n        \"Source\": \"Museumdefundatie\",\n        \"Sizes\": {\n            \"GB\": 0.23,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 6,\n            \"ACT_US\": 6\n        }\n    },\n    {\n        \"Source\": \"MuseumVoorlinden\",\n        \"Sizes\": {\n            \"GB\": 0.32,\n            \"MFCP\": 0.06,\n            \"CO\": 0.01,\n            \"US\": 1,\n            \"ACT_US\": 1\n        }\n    },\n    {\n        \"Source\": \"Nbtc\",\n        \"Sizes\": {\n            \"GB\": 8,\n            \"MFCP\": 0.05,\n            \"CO\": 6.98,\n            \"US\": 3,\n            \"ACT_US\": 3\n        }\n    },\n    {\n        \"Source\": \"Neuteboom\",\n        \"Sizes\": {\n            \"GB\": 164.21,\n            \"MFCP\": 3.36,\n            \"CO\": 157.33,\n            \"US\": 40,\n            \"ACT_US\": 40\n        }\n    },\n    {\n        \"Source\": \"Newasco\",\n        \"Sizes\": {\n            \"GB\": 61.34,\n            \"MFCP\": 0,\n            \"CO\": 59.53,\n            \"US\": 15,\n            \"ACT_US\": 15\n        }\n    },\n    {\n        \"Source\": \"Newpackaginggroup\",\n        \"Sizes\": {\n            \"GB\": 38.63,\n            \"MFCP\": 0.02,\n            \"CO\": 37.77,\n            \"US\": 20,\n            \"ACT_US\": 20\n        }\n    },\n    {\n        \"Source\": \"Nieuwvolendam\",\n        \"Sizes\": {\n            \"GB\": 37.46,\n            \"MFCP\": 0,\n            \"CO\": 34.63,\n            \"US\": 3,\n            \"ACT_US\": 3\n        }\n    },\n    {\n        \"Source\": \"NSVP\",\n        \"Sizes\": {\n            \"GB\": 0.38,\n            \"MFCP\": 0,\n            \"CO\": 0.2,\n            \"US\": 1,\n            \"ACT_US\": 1\n        }\n    },\n    {\n        \"Source\": \"NTI\",\n        \"Sizes\": {\n            \"GB\": 40.41,\n            \"MFCP\": 0.63,\n            \"CO\": 38.79,\n            \"US\": 10,\n            \"ACT_US\": 8\n        }\n    },\n    {\n        \"Source\": \"NWABeheer\",\n        \"Sizes\": {\n            \"GB\": 12.75,\n            \"MFCP\": 0,\n            \"CO\": 12.33,\n            \"US\": 4,\n            \"ACT_US\": 4\n        }\n    },\n    {\n        \"Source\": \"Odion\",\n        \"Sizes\": {\n            \"GB\": 9.73,\n            \"MFCP\": 0.14,\n            \"CO\": 7.55,\n            \"US\": 10,\n            \"ACT_US\": -53\n        }\n    },\n    {\n        \"Source\": \"ODS-Instrumenten\",\n        \"Sizes\": {\n            \"GB\": 0.72,\n            \"MFCP\": 0,\n            \"CO\": 0.26,\n            \"US\": 15,\n            \"ACT_US\": 12\n        }\n    },\n    {\n        \"Source\": \"Omroepwest\",\n        \"Sizes\": {\n            \"GB\": 55,\n            \"MFCP\": 0,\n            \"CO\": 51.18,\n            \"US\": 26,\n            \"ACT_US\": 26\n        }\n    },\n    {\n        \"Source\": \"OnSales\",\n        \"Sizes\": {\n            \"GB\": 18.93,\n            \"MFCP\": 0.42,\n            \"CO\": 16.44,\n            \"US\": 3,\n            \"ACT_US\": 3\n        }\n    },\n    {\n        \"Source\": \"Orbichemicals\",\n        \"Sizes\": {\n            \"GB\": 0.19,\n            \"MFCP\": 0.01,\n            \"CO\": 0.03,\n            \"US\": 7,\n            \"ACT_US\": 7\n        }\n    },\n    {\n        \"Source\": \"Oudshoorndef\",\n        \"Sizes\": {\n            \"GB\": 69.4,\n            \"MFCP\": 0.13,\n            \"CO\": 65.58,\n            \"US\": 11,\n            \"ACT_US\": 11\n        }\n    },\n    {\n        \"Source\": \"Ovivoholland\",\n        \"Sizes\": {\n            \"GB\": 0.33,\n            \"MFCP\": 0.06,\n            \"CO\": 0.07,\n            \"US\": 15,\n            \"ACT_US\": 9\n        }\n    },\n    {\n        \"Source\": \"Oxheavy\",\n        \"Sizes\": {\n            \"GB\": 4.62,\n            \"MFCP\": 0.04,\n            \"CO\": 4.51,\n            \"US\": 1,\n            \"ACT_US\": 1\n        }\n    },\n    {\n        \"Source\": \"P4P\",\n        \"Sizes\": {\n            \"GB\": 6.32,\n            \"MFCP\": 0,\n            \"CO\": 5.78,\n            \"US\": 10,\n            \"ACT_US\": 10\n        }\n    },\n    {\n        \"Source\": \"Paperforpaper\",\n        \"Sizes\": {\n            \"GB\": 219.64,\n            \"MFCP\": 2.4,\n            \"CO\": 203.68,\n            \"US\": 13,\n            \"ACT_US\": 13\n        }\n    },\n    {\n        \"Source\": \"Parkmanagementhoorn\",\n        \"Sizes\": {\n            \"GB\": 7.5,\n            \"MFCP\": 0.53,\n            \"CO\": 7.01,\n            \"US\": 13,\n            \"ACT_US\": 13\n        }\n    },\n    {\n        \"Source\": \"Pavonis\",\n        \"Sizes\": {\n            \"GB\": 39.99,\n            \"MFCP\": 0.2,\n            \"CO\": 33.51,\n            \"US\": 3,\n            \"ACT_US\": 3\n        }\n    },\n    {\n        \"Source\": \"Pkolie\",\n        \"Sizes\": {\n            \"GB\": 0.64,\n            \"MFCP\": 0,\n            \"CO\": 0.48,\n            \"US\": 5,\n            \"ACT_US\": 5\n        }\n    },\n    {\n        \"Source\": \"PlantSelect\",\n        \"Sizes\": {\n            \"GB\": 2.71,\n            \"MFCP\": 0.02,\n            \"CO\": 1.65,\n            \"US\": 7,\n            \"ACT_US\": 7\n        }\n    },\n    {\n        \"Source\": \"Premiumpetfood\",\n        \"Sizes\": {\n            \"GB\": 3.6,\n            \"MFCP\": 0,\n            \"CO\": 1.64,\n            \"US\": 11,\n            \"ACT_US\": 9\n        }\n    },\n    {\n        \"Source\": \"Pro\",\n        \"Sizes\": {\n            \"GB\": 0.24,\n            \"MFCP\": 0.07,\n            \"CO\": 0.18,\n            \"US\": 4,\n            \"ACT_US\": 4\n        }\n    },\n    {\n        \"Source\": \"Proftrainingen\",\n        \"Sizes\": {\n            \"GB\": 1.48,\n            \"MFCP\": 0,\n            \"CO\": 1.02,\n            \"US\": 3,\n            \"ACT_US\": 3\n        }\n    },\n    {\n        \"Source\": \"Prograss\",\n        \"Sizes\": {\n            \"GB\": 50.54,\n            \"MFCP\": 1.1,\n            \"CO\": 47.66,\n            \"US\": 5,\n            \"ACT_US\": 5\n        }\n    },\n    {\n        \"Source\": \"Promas\",\n        \"Sizes\": {\n            \"GB\": 157.7,\n            \"MFCP\": 0,\n            \"CO\": 153.47,\n            \"US\": 8,\n            \"ACT_US\": 8\n        }\n    },\n    {\n        \"Source\": \"Quadralux\",\n        \"Sizes\": {\n            \"GB\": 2.6,\n            \"MFCP\": 0,\n            \"CO\": 2.37,\n            \"US\": 3,\n            \"ACT_US\": 3\n        }\n    },\n    {\n        \"Source\": \"RAVO\",\n        \"Sizes\": {\n            \"GB\": 6.6,\n            \"MFCP\": 0.03,\n            \"CO\": 5.9,\n            \"US\": 16,\n            \"ACT_US\": 16\n        }\n    },\n    {\n        \"Source\": \"Reac\",\n        \"Sizes\": {\n            \"GB\": 3.56,\n            \"MFCP\": 0.16,\n            \"CO\": 2.84,\n            \"US\": 7,\n            \"ACT_US\": 7\n        }\n    },\n    {\n        \"Source\": \"Reppel\",\n        \"Sizes\": {\n            \"GB\": 169.81,\n            \"MFCP\": 6.51,\n            \"CO\": 163.96,\n            \"US\": 23,\n            \"ACT_US\": 23\n        }\n    },\n    {\n        \"Source\": \"Reusmedia\",\n        \"Sizes\": {\n            \"GB\": 20.39,\n            \"MFCP\": 0.38,\n            \"CO\": 10.99,\n            \"US\": 5,\n            \"ACT_US\": 4\n        }\n    },\n    {\n        \"Source\": \"Reusmedia2\",\n        \"Sizes\": {\n            \"GB\": 0.17,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 5,\n            \"ACT_US\": 5\n        }\n    },\n    {\n        \"Source\": \"Roerdalen\",\n        \"Sizes\": {\n            \"GB\": 0.11,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 2,\n            \"ACT_US\": 2\n        }\n    },\n    {\n        \"Source\": \"Rtvnoord\",\n        \"Sizes\": {\n            \"GB\": 0.12,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 15,\n            \"ACT_US\": 15\n        }\n    },\n    {\n        \"Source\": \"Rungis\",\n        \"Sizes\": {\n            \"GB\": 2.05,\n            \"MFCP\": 0.17,\n            \"CO\": 1.33,\n            \"US\": 14,\n            \"ACT_US\": 14\n        }\n    },\n    {\n        \"Source\": \"Ruwenberg\",\n        \"Sizes\": {\n            \"GB\": 68.3,\n            \"MFCP\": 0.35,\n            \"CO\": 66.4,\n            \"US\": 7,\n            \"ACT_US\": 7\n        }\n    },\n    {\n        \"Source\": \"SalesRepublic\",\n        \"Sizes\": {\n            \"GB\": 31.42,\n            \"MFCP\": 1.39,\n            \"CO\": 30.49,\n            \"US\": 5,\n            \"ACT_US\": 5\n        }\n    },\n    {\n        \"Source\": \"Schoevers\",\n        \"Sizes\": {\n            \"GB\": 1.02,\n            \"MFCP\": 0.04,\n            \"CO\": 0.64,\n            \"US\": 1,\n            \"ACT_US\": 1\n        }\n    },\n    {\n        \"Source\": \"Schwiening\",\n        \"Sizes\": {\n            \"GB\": 25.67,\n            \"MFCP\": 0,\n            \"CO\": 24.3,\n            \"US\": 2,\n            \"ACT_US\": 2\n        }\n    },\n    {\n        \"Source\": \"Sellox\",\n        \"Sizes\": {\n            \"GB\": 74,\n            \"MFCP\": 0.3,\n            \"CO\": 71.6,\n            \"US\": 15,\n            \"ACT_US\": 9\n        }\n    },\n    {\n        \"Source\": \"SFA\",\n        \"Sizes\": {\n            \"GB\": 75.11,\n            \"MFCP\": 20.78,\n            \"CO\": 72.17,\n            \"US\": 17,\n            \"ACT_US\": 17\n        }\n    },\n    {\n        \"Source\": \"SHU\",\n        \"Sizes\": {\n            \"GB\": 0.75,\n            \"MFCP\": 0,\n            \"CO\": 0.6,\n            \"US\": 6,\n            \"ACT_US\": 6\n        }\n    },\n    {\n        \"Source\": \"Silentgliss\",\n        \"Sizes\": {\n            \"GB\": 143.62,\n            \"MFCP\": 0.33,\n            \"CO\": 140.17,\n            \"US\": 7,\n            \"ACT_US\": 5\n        }\n    },\n    {\n        \"Source\": \"Siriusint\",\n        \"Sizes\": {\n            \"GB\": 5.71,\n            \"MFCP\": 0.11,\n            \"CO\": 5.22,\n            \"US\": 6,\n            \"ACT_US\": 6\n        }\n    },\n    {\n        \"Source\": \"Slumpoil\",\n        \"Sizes\": {\n            \"GB\": 106.84,\n            \"MFCP\": 5.26,\n            \"CO\": 98.03,\n            \"US\": 19,\n            \"ACT_US\": 19\n        }\n    },\n    {\n        \"Source\": \"SMA\",\n        \"Sizes\": {\n            \"GB\": 16.77,\n            \"MFCP\": 0.16,\n            \"CO\": 12.58,\n            \"US\": 10,\n            \"ACT_US\": 8\n        }\n    },\n    {\n        \"Source\": \"Softtech\",\n        \"Sizes\": {\n            \"GB\": 0.07,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 2,\n            \"ACT_US\": 2\n        }\n    },\n    {\n        \"Source\": \"Sonal\",\n        \"Sizes\": {\n            \"GB\": 140.94,\n            \"MFCP\": 0.33,\n            \"CO\": 124.94,\n            \"US\": 12,\n            \"ACT_US\": 12\n        }\n    },\n    {\n        \"Source\": \"Spierenvoorspieren\",\n        \"Sizes\": {\n            \"GB\": 1.03,\n            \"MFCP\": 0.1,\n            \"CO\": 0.94,\n            \"US\": 2,\n            \"ACT_US\": 2\n        }\n    },\n    {\n        \"Source\": \"sportbedrijfdeventer\",\n        \"Sizes\": {\n            \"GB\": 40.82,\n            \"MFCP\": 0,\n            \"CO\": 39.63,\n            \"US\": 3,\n            \"ACT_US\": 3\n        }\n    },\n    {\n        \"Source\": \"Sprokkereef\",\n        \"Sizes\": {\n            \"GB\": 0.16,\n            \"MFCP\": 0.01,\n            \"CO\": 0,\n            \"US\": 2,\n            \"ACT_US\": 2\n        }\n    },\n    {\n        \"Source\": \"SRMRott\",\n        \"Sizes\": {\n            \"GB\": 37.98,\n            \"MFCP\": 0.11,\n            \"CO\": 0.1,\n            \"US\": 17,\n            \"ACT_US\": 10\n        }\n    },\n    {\n        \"Source\": \"StichtingVbV\",\n        \"Sizes\": {\n            \"GB\": 0.07,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 10,\n            \"ACT_US\": 10\n        }\n    },\n    {\n        \"Source\": \"Strikemedia\",\n        \"Sizes\": {\n            \"GB\": 0.47,\n            \"MFCP\": 0,\n            \"CO\": 0.01,\n            \"US\": 1,\n            \"ACT_US\": 1\n        }\n    },\n    {\n        \"Source\": \"Synorga\",\n        \"Sizes\": {\n            \"GB\": 104.36,\n            \"MFCP\": 73.24,\n            \"CO\": 96.41,\n            \"US\": 3,\n            \"ACT_US\": 3\n        }\n    },\n    {\n        \"Source\": \"TCL\",\n        \"Sizes\": {\n            \"GB\": 14.26,\n            \"MFCP\": 0.05,\n            \"CO\": 13.36,\n            \"US\": 8,\n            \"ACT_US\": 8\n        }\n    },\n    {\n        \"Source\": \"Tectonaforestry\",\n        \"Sizes\": {\n            \"GB\": 3.94,\n            \"MFCP\": 0.17,\n            \"CO\": 3.51,\n            \"US\": 2,\n            \"ACT_US\": 2\n        }\n    },\n    {\n        \"Source\": \"Teelen\",\n        \"Sizes\": {\n            \"GB\": 2.54,\n            \"MFCP\": 0.13,\n            \"CO\": 2.32,\n            \"US\": 10,\n            \"ACT_US\": 9\n        }\n    },\n    {\n        \"Source\": \"Telesalesdirect\",\n        \"Sizes\": {\n            \"GB\": 3.74,\n            \"MFCP\": 5.58,\n            \"CO\": 2.81,\n            \"US\": 8,\n            \"ACT_US\": 7\n        }\n    },\n    {\n        \"Source\": \"Tki\",\n        \"Sizes\": {\n            \"GB\": 0.14,\n            \"MFCP\": 0,\n            \"CO\": 0.04,\n            \"US\": 3,\n            \"ACT_US\": 3\n        }\n    },\n    {\n        \"Source\": \"Topsectorict\",\n        \"Sizes\": {\n            \"GB\": 0.12,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 4,\n            \"ACT_US\": 4\n        }\n    },\n    {\n        \"Source\": \"ToyoTires\",\n        \"Sizes\": {\n            \"GB\": 8.69,\n            \"MFCP\": 0.12,\n            \"CO\": 7.29,\n            \"US\": 13,\n            \"ACT_US\": 13\n        }\n    },\n    {\n        \"Source\": \"Transfer\",\n        \"Sizes\": {\n            \"GB\": 10,\n            \"MFCP\": 0.1,\n            \"CO\": 9.72,\n            \"US\": 25,\n            \"ACT_US\": 25\n        }\n    },\n    {\n        \"Source\": \"Traprenovatienederland\",\n        \"Sizes\": {\n            \"GB\": 0.12,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 7,\n            \"ACT_US\": 7\n        }\n    },\n    {\n        \"Source\": \"Troostwijk\",\n        \"Sizes\": {\n            \"GB\": 0.18,\n            \"MFCP\": 0.55,\n            \"CO\": 0,\n            \"US\": 15,\n            \"ACT_US\": 15\n        }\n    },\n    {\n        \"Source\": \"Trustus\",\n        \"Sizes\": {\n            \"GB\": 5.04,\n            \"MFCP\": 0,\n            \"CO\": 4.73,\n            \"US\": 2,\n            \"ACT_US\": 2\n        }\n    },\n    {\n        \"Source\": \"UWV-A\",\n        \"Sizes\": {\n            \"GB\": 0.61,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 115,\n            \"ACT_US\": 115\n        }\n    },\n    {\n        \"Source\": \"UWV-A-CRM\",\n        \"Sizes\": {\n            \"GB\": 0.61,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 115,\n            \"ACT_US\": 115\n        }\n    },\n    {\n        \"Source\": \"UWV-P\",\n        \"Sizes\": {\n            \"GB\": 1.56,\n            \"MFCP\": 0,\n            \"CO\": 0.86,\n            \"US\": 115,\n            \"ACT_US\": 115\n        }\n    },\n    {\n        \"Source\": \"UWV-TEST\",\n        \"Sizes\": {\n            \"GB\": 0.97,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 105,\n            \"ACT_US\": 105\n        }\n    },\n    {\n        \"Source\": \"Vadobag\",\n        \"Sizes\": {\n            \"GB\": 11.26,\n            \"MFCP\": 0.09,\n            \"CO\": 10.76,\n            \"US\": 9,\n            \"ACT_US\": 9\n        }\n    },\n    {\n        \"Source\": \"Vandijnsen\",\n        \"Sizes\": {\n            \"GB\": 28.17,\n            \"MFCP\": 0.32,\n            \"CO\": 22.93,\n            \"US\": 5,\n            \"ACT_US\": 5\n        }\n    },\n    {\n        \"Source\": \"VBS\",\n        \"Sizes\": {\n            \"GB\": 98.83,\n            \"MFCP\": 17.79,\n            \"CO\": 96.66,\n            \"US\": 16,\n            \"ACT_US\": 16\n        }\n    },\n    {\n        \"Source\": \"Verachtert\",\n        \"Sizes\": {\n            \"GB\": 16.43,\n            \"MFCP\": 1.72,\n            \"CO\": 0.72,\n            \"US\": 20,\n            \"ACT_US\": 18\n        }\n    },\n    {\n        \"Source\": \"Verdana\",\n        \"Sizes\": {\n            \"GB\": 0.04,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 2,\n            \"ACT_US\": 2\n        }\n    },\n    {\n        \"Source\": \"Vifaass\",\n        \"Sizes\": {\n            \"GB\": 101.22,\n            \"MFCP\": 0.27,\n            \"CO\": 70.48,\n            \"US\": 6,\n            \"ACT_US\": 4\n        }\n    },\n    {\n        \"Source\": \"Villajoep\",\n        \"Sizes\": {\n            \"GB\": 0.34,\n            \"MFCP\": 0.09,\n            \"CO\": 0.05,\n            \"US\": 30,\n            \"ACT_US\": 20\n        }\n    },\n    {\n        \"Source\": \"Vitadent\",\n        \"Sizes\": {\n            \"GB\": 4.64,\n            \"MFCP\": 0.07,\n            \"CO\": 4.29,\n            \"US\": 11,\n            \"ACT_US\": 11\n        }\n    },\n    {\n        \"Source\": \"VOSENSETZ\",\n        \"Sizes\": {\n            \"GB\": 602.87,\n            \"MFCP\": 1.75,\n            \"CO\": 587.31,\n            \"US\": 11,\n            \"ACT_US\": 11\n        }\n    },\n    {\n        \"Source\": \"Waadhoeke\",\n        \"Sizes\": {\n            \"GB\": 1.08,\n            \"MFCP\": 0.11,\n            \"CO\": 0.89,\n            \"US\": 8,\n            \"ACT_US\": 8\n        }\n    },\n    {\n        \"Source\": \"Waalhaven\",\n        \"Sizes\": {\n            \"GB\": 2.13,\n            \"MFCP\": 0.01,\n            \"CO\": 1.74,\n            \"US\": 8,\n            \"ACT_US\": 8\n        }\n    },\n    {\n        \"Source\": \"Waterkracht\",\n        \"Sizes\": {\n            \"GB\": 146.47,\n            \"MFCP\": 7.11,\n            \"CO\": 122.15,\n            \"US\": 22,\n            \"ACT_US\": 22\n        }\n    },\n    {\n        \"Source\": \"Wegter\",\n        \"Sizes\": {\n            \"GB\": 325.44,\n            \"MFCP\": 0.41,\n            \"CO\": 320.1,\n            \"US\": 22,\n            \"ACT_US\": 22\n        }\n    },\n    {\n        \"Source\": \"Weska\",\n        \"Sizes\": {\n            \"GB\": 102.31,\n            \"MFCP\": 1.16,\n            \"CO\": 97.39,\n            \"US\": 8,\n            \"ACT_US\": 8\n        }\n    },\n    {\n        \"Source\": \"WKKItaly\",\n        \"Sizes\": {\n            \"GB\": 2.55,\n            \"MFCP\": 0,\n            \"CO\": 1.8,\n            \"US\": 8,\n            \"ACT_US\": 8\n        }\n    },\n    {\n        \"Source\": \"Wolting\",\n        \"Sizes\": {\n            \"GB\": 12.56,\n            \"MFCP\": 0.01,\n            \"CO\": 11.35,\n            \"US\": 3,\n            \"ACT_US\": 3\n        }\n    },\n    {\n        \"Source\": \"Yale\",\n        \"Sizes\": {\n            \"GB\": 0.53,\n            \"MFCP\": 0,\n            \"CO\": 0,\n            \"US\": 1,\n            \"ACT_US\": 0\n        }\n    },\n    {\n        \"Source\": \"Zoetermeer\",\n        \"Sizes\": {\n            \"GB\": 4.3,\n            \"MFCP\": 0.07,\n            \"CO\": 3.52,\n            \"US\": 20,\n            \"ACT_US\": -84\n        }\n    }\n]"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Prediction",
+			"item": [
+				{
+					"name": "Predict",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is less than 800ms\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Validate the structure of predictedGB object\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData.predictedGB).to.exist.and.to.be.an('object');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"PredictedMFCP object should have the correct structure\", function () {\r",
+									"  const responseData = pm.response.json();\r",
+									"\r",
+									"  pm.expect(responseData.predictedMFCP).to.be.an('object');\r",
+									"  pm.expect(responseData.predictedMFCP.predictedData).to.exist.and.to.be.an('array');\r",
+									"  pm.expect(responseData.predictedMFCP.dateArray).to.exist.and.to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Validate the structure of predictedCO object\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData.predictedCO).to.exist;\r",
+									"    pm.expect(responseData.predictedCO).to.be.an('object');\r",
+									"    pm.expect(responseData.predictedCO.predictedData).to.exist.and.to.be.an('array');\r",
+									"    pm.expect(responseData.predictedCO.dateArray).to.exist.and.to.be.an('array');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/v1/predict",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"predict"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4000/api/v1/predict",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"api",
+										"v1",
+										"predict"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-security-policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "cross-origin-opener-policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "cross-origin-resource-policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "origin-agent-cluster",
+									"value": "?1"
+								},
+								{
+									"key": "referrer-policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-dns-prefetch-control",
+									"value": "off"
+								},
+								{
+									"key": "x-download-options",
+									"value": "noopen"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "x-permitted-cross-domain-policies",
+									"value": "none"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "0"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "150"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "149"
+								},
+								{
+									"key": "date",
+									"value": "Mon, 27 May 2024 09:46:59 GMT"
+								},
+								{
+									"key": "x-ratelimit-reset",
+									"value": "1716804120"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-credentials",
+									"value": "true"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"bbd-Y6ZmxOUx4D8eFyp8lt5gjOk2/hw\""
+								},
+								{
+									"key": "cache-control",
+									"value": "max-age=1758"
+								},
+								{
+									"key": "apicache-store",
+									"value": "memory"
+								},
+								{
+									"key": "apicache-version",
+									"value": "1.6.3"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"predictedGB\": {\n        \"predictedData\": [\n            8479,\n            8484,\n            8490,\n            8495,\n            8501,\n            8506,\n            8512,\n            8517,\n            8523,\n            8528,\n            8534,\n            8539,\n            8545,\n            8550,\n            8556,\n            8561,\n            8567,\n            8572,\n            8578,\n            8583,\n            8589,\n            8594,\n            8600,\n            8605,\n            8611,\n            8616,\n            8622,\n            8627,\n            8633,\n            8638,\n            8644\n        ],\n        \"dateArray\": [\n            \"2024-05-27\",\n            \"2024-05-28\",\n            \"2024-05-29\",\n            \"2024-05-30\",\n            \"2024-05-31\",\n            \"2024-06-01\",\n            \"2024-06-02\",\n            \"2024-06-03\",\n            \"2024-06-04\",\n            \"2024-06-05\",\n            \"2024-06-06\",\n            \"2024-06-07\",\n            \"2024-06-08\",\n            \"2024-06-09\",\n            \"2024-06-10\",\n            \"2024-06-11\",\n            \"2024-06-12\",\n            \"2024-06-13\",\n            \"2024-06-14\",\n            \"2024-06-15\",\n            \"2024-06-16\",\n            \"2024-06-17\",\n            \"2024-06-18\",\n            \"2024-06-19\",\n            \"2024-06-20\",\n            \"2024-06-21\",\n            \"2024-06-22\",\n            \"2024-06-23\",\n            \"2024-06-24\",\n            \"2024-06-25\",\n            \"2024-06-26\"\n        ]\n    },\n    \"predictedMFCP\": {\n        \"predictedData\": [\n            763,\n            764,\n            764,\n            764,\n            764,\n            764,\n            764,\n            764,\n            764,\n            764,\n            764,\n            764,\n            764,\n            764,\n            765,\n            765,\n            765,\n            765,\n            765,\n            765,\n            765,\n            765,\n            765,\n            765,\n            765,\n            765,\n            765,\n            766,\n            766,\n            766,\n            766\n        ],\n        \"dateArray\": [\n            \"2024-05-27\",\n            \"2024-05-28\",\n            \"2024-05-29\",\n            \"2024-05-30\",\n            \"2024-05-31\",\n            \"2024-06-01\",\n            \"2024-06-02\",\n            \"2024-06-03\",\n            \"2024-06-04\",\n            \"2024-06-05\",\n            \"2024-06-06\",\n            \"2024-06-07\",\n            \"2024-06-08\",\n            \"2024-06-09\",\n            \"2024-06-10\",\n            \"2024-06-11\",\n            \"2024-06-12\",\n            \"2024-06-13\",\n            \"2024-06-14\",\n            \"2024-06-15\",\n            \"2024-06-16\",\n            \"2024-06-17\",\n            \"2024-06-18\",\n            \"2024-06-19\",\n            \"2024-06-20\",\n            \"2024-06-21\",\n            \"2024-06-22\",\n            \"2024-06-23\",\n            \"2024-06-24\",\n            \"2024-06-25\",\n            \"2024-06-26\"\n        ]\n    },\n    \"predictedCO\": {\n        \"predictedData\": [\n            7703,\n            7707,\n            7711,\n            7714,\n            7718,\n            7722,\n            7726,\n            7729,\n            7733,\n            7737,\n            7741,\n            7744,\n            7748,\n            7752,\n            7756,\n            7759,\n            7763,\n            7767,\n            7770,\n            7774,\n            7778,\n            7782,\n            7785,\n            7789,\n            7793,\n            7797,\n            7800,\n            7804,\n            7808,\n            7812,\n            7815\n        ],\n        \"dateArray\": [\n            \"2024-05-27\",\n            \"2024-05-28\",\n            \"2024-05-29\",\n            \"2024-05-30\",\n            \"2024-05-31\",\n            \"2024-06-01\",\n            \"2024-06-02\",\n            \"2024-06-03\",\n            \"2024-06-04\",\n            \"2024-06-05\",\n            \"2024-06-06\",\n            \"2024-06-07\",\n            \"2024-06-08\",\n            \"2024-06-09\",\n            \"2024-06-10\",\n            \"2024-06-11\",\n            \"2024-06-12\",\n            \"2024-06-13\",\n            \"2024-06-14\",\n            \"2024-06-15\",\n            \"2024-06-16\",\n            \"2024-06-17\",\n            \"2024-06-18\",\n            \"2024-06-19\",\n            \"2024-06-20\",\n            \"2024-06-21\",\n            \"2024-06-22\",\n            \"2024-06-23\",\n            \"2024-06-24\",\n            \"2024-06-25\",\n            \"2024-06-26\"\n        ]\n    },\n    \"predictedUS\": {\n        \"predictedData\": [\n            3411,\n            3413,\n            3415,\n            3418,\n            3420,\n            3423,\n            3425,\n            3428,\n            3430,\n            3433,\n            3435,\n            3438,\n            3440,\n            3443,\n            3445,\n            3448,\n            3450,\n            3452,\n            3455,\n            3457,\n            3460,\n            3462,\n            3465,\n            3467,\n            3470,\n            3472,\n            3475,\n            3477,\n            3480,\n            3482,\n            3484\n        ],\n        \"dateArray\": [\n            \"2024-05-27\",\n            \"2024-05-28\",\n            \"2024-05-29\",\n            \"2024-05-30\",\n            \"2024-05-31\",\n            \"2024-06-01\",\n            \"2024-06-02\",\n            \"2024-06-03\",\n            \"2024-06-04\",\n            \"2024-06-05\",\n            \"2024-06-06\",\n            \"2024-06-07\",\n            \"2024-06-08\",\n            \"2024-06-09\",\n            \"2024-06-10\",\n            \"2024-06-11\",\n            \"2024-06-12\",\n            \"2024-06-13\",\n            \"2024-06-14\",\n            \"2024-06-15\",\n            \"2024-06-16\",\n            \"2024-06-17\",\n            \"2024-06-18\",\n            \"2024-06-19\",\n            \"2024-06-20\",\n            \"2024-06-21\",\n            \"2024-06-22\",\n            \"2024-06-23\",\n            \"2024-06-24\",\n            \"2024-06-25\",\n            \"2024-06-26\"\n        ]\n    },\n    \"predictedACTUS\": {\n        \"predictedData\": [\n            2791,\n            2793,\n            2795,\n            2796,\n            2798,\n            2800,\n            2802,\n            2804,\n            2806,\n            2808,\n            2810,\n            2812,\n            2814,\n            2816,\n            2818,\n            2820,\n            2822,\n            2824,\n            2826,\n            2828,\n            2830,\n            2832,\n            2834,\n            2836,\n            2838,\n            2840,\n            2842,\n            2844,\n            2846,\n            2848,\n            2850\n        ],\n        \"dateArray\": [\n            \"2024-05-27\",\n            \"2024-05-28\",\n            \"2024-05-29\",\n            \"2024-05-30\",\n            \"2024-05-31\",\n            \"2024-06-01\",\n            \"2024-06-02\",\n            \"2024-06-03\",\n            \"2024-06-04\",\n            \"2024-06-05\",\n            \"2024-06-06\",\n            \"2024-06-07\",\n            \"2024-06-08\",\n            \"2024-06-09\",\n            \"2024-06-10\",\n            \"2024-06-11\",\n            \"2024-06-12\",\n            \"2024-06-13\",\n            \"2024-06-14\",\n            \"2024-06-15\",\n            \"2024-06-16\",\n            \"2024-06-17\",\n            \"2024-06-18\",\n            \"2024-06-19\",\n            \"2024-06-20\",\n            \"2024-06-21\",\n            \"2024-06-22\",\n            \"2024-06-23\",\n            \"2024-06-24\",\n            \"2024-06-25\",\n            \"2024-06-26\"\n        ]\n    }\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4000/api/v1/predict",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"api",
+										"v1",
+										"predict"
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "2"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "0"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 27 May 2024 09:49:19 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1716804253"
+								},
+								{
+									"key": "Retry-After",
+									"value": "893"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-UpTsLJ74nYuiLgNgEwlQMxGqwrE\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Too many requests, please try again later."
+						}
+					]
+				},
+				{
+					"name": "Predict",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is within the acceptable range\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(800);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Validate the structure of the response object\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData).to.have.property('predictedGB');\r",
+									"    pm.expect(responseData).to.have.property('predictedMFCP');\r",
+									"    pm.expect(responseData).to.have.property('predictedCO');\r",
+									"    pm.expect(responseData).to.have.property('predictedUS');\r",
+									"    pm.expect(responseData).to.have.property('predictedACTUS');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"PredictedGB object contains predictedData and dateArray keys\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData.predictedGB).to.be.an('object');\r",
+									"    pm.expect(responseData.predictedGB).to.have.property('predictedData');\r",
+									"    pm.expect(responseData.predictedGB).to.have.property('dateArray');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"PredictedMFCP object contains keys 'predictedData' and 'dateArray'\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData.predictedMFCP).to.be.an('object');\r",
+									"    pm.expect(responseData.predictedMFCP).to.include.all.keys('predictedData', 'dateArray');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"companies\": [\r\n        \"Ang\",\r\n        \"3psy\",\r\n        \"Brouwer\"\r\n    ],\r\n    \"dates\": [45397, 45404]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/v1/predict",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"predict"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"companies\": [\r\n        \"Ang\",\r\n        \"3psy\",\r\n        \"Brouwer\"\r\n    ],\r\n    \"dates\": [45397, 45404]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/api/v1/predict",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"api",
+										"v1",
+										"predict"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "2"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "1"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 27 May 2024 09:51:03 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1716804364"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ae4-SY1vfQayF3z4PP/fPclJJbd/8H8\""
+								},
+								{
+									"key": "cache-control",
+									"value": "max-age=1800"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"predictedGB\": {\n        \"predictedData\": [\n            655,\n            655,\n            655,\n            656,\n            656,\n            656,\n            656,\n            656,\n            657,\n            657,\n            657,\n            657,\n            658,\n            658,\n            658,\n            658,\n            658,\n            659,\n            659,\n            659,\n            659,\n            659,\n            660,\n            660,\n            660,\n            660,\n            660,\n            661,\n            661,\n            661,\n            661\n        ],\n        \"dateArray\": [\n            \"2024-05-27\",\n            \"2024-05-28\",\n            \"2024-05-29\",\n            \"2024-05-30\",\n            \"2024-05-31\",\n            \"2024-06-01\",\n            \"2024-06-02\",\n            \"2024-06-03\",\n            \"2024-06-04\",\n            \"2024-06-05\",\n            \"2024-06-06\",\n            \"2024-06-07\",\n            \"2024-06-08\",\n            \"2024-06-09\",\n            \"2024-06-10\",\n            \"2024-06-11\",\n            \"2024-06-12\",\n            \"2024-06-13\",\n            \"2024-06-14\",\n            \"2024-06-15\",\n            \"2024-06-16\",\n            \"2024-06-17\",\n            \"2024-06-18\",\n            \"2024-06-19\",\n            \"2024-06-20\",\n            \"2024-06-21\",\n            \"2024-06-22\",\n            \"2024-06-23\",\n            \"2024-06-24\",\n            \"2024-06-25\",\n            \"2024-06-26\"\n        ]\n    },\n    \"predictedMFCP\": {\n        \"predictedData\": [\n            11,\n            11,\n            11,\n            11,\n            11,\n            11,\n            11,\n            11,\n            11,\n            11,\n            11,\n            11,\n            11,\n            11,\n            11,\n            11,\n            11,\n            11,\n            11,\n            11,\n            11,\n            11,\n            11,\n            11,\n            11,\n            11,\n            11,\n            11,\n            11,\n            11,\n            11\n        ],\n        \"dateArray\": [\n            \"2024-05-27\",\n            \"2024-05-28\",\n            \"2024-05-29\",\n            \"2024-05-30\",\n            \"2024-05-31\",\n            \"2024-06-01\",\n            \"2024-06-02\",\n            \"2024-06-03\",\n            \"2024-06-04\",\n            \"2024-06-05\",\n            \"2024-06-06\",\n            \"2024-06-07\",\n            \"2024-06-08\",\n            \"2024-06-09\",\n            \"2024-06-10\",\n            \"2024-06-11\",\n            \"2024-06-12\",\n            \"2024-06-13\",\n            \"2024-06-14\",\n            \"2024-06-15\",\n            \"2024-06-16\",\n            \"2024-06-17\",\n            \"2024-06-18\",\n            \"2024-06-19\",\n            \"2024-06-20\",\n            \"2024-06-21\",\n            \"2024-06-22\",\n            \"2024-06-23\",\n            \"2024-06-24\",\n            \"2024-06-25\",\n            \"2024-06-26\"\n        ]\n    },\n    \"predictedCO\": {\n        \"predictedData\": [\n            580,\n            580,\n            580,\n            581,\n            581,\n            581,\n            582,\n            582,\n            582,\n            583,\n            583,\n            583,\n            584,\n            584,\n            584,\n            585,\n            585,\n            585,\n            586,\n            586,\n            586,\n            587,\n            587,\n            587,\n            588,\n            588,\n            588,\n            589,\n            589,\n            589,\n            590\n        ],\n        \"dateArray\": [\n            \"2024-05-27\",\n            \"2024-05-28\",\n            \"2024-05-29\",\n            \"2024-05-30\",\n            \"2024-05-31\",\n            \"2024-06-01\",\n            \"2024-06-02\",\n            \"2024-06-03\",\n            \"2024-06-04\",\n            \"2024-06-05\",\n            \"2024-06-06\",\n            \"2024-06-07\",\n            \"2024-06-08\",\n            \"2024-06-09\",\n            \"2024-06-10\",\n            \"2024-06-11\",\n            \"2024-06-12\",\n            \"2024-06-13\",\n            \"2024-06-14\",\n            \"2024-06-15\",\n            \"2024-06-16\",\n            \"2024-06-17\",\n            \"2024-06-18\",\n            \"2024-06-19\",\n            \"2024-06-20\",\n            \"2024-06-21\",\n            \"2024-06-22\",\n            \"2024-06-23\",\n            \"2024-06-24\",\n            \"2024-06-25\",\n            \"2024-06-26\"\n        ]\n    },\n    \"predictedUS\": {\n        \"predictedData\": [\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21\n        ],\n        \"dateArray\": [\n            \"2024-05-27\",\n            \"2024-05-28\",\n            \"2024-05-29\",\n            \"2024-05-30\",\n            \"2024-05-31\",\n            \"2024-06-01\",\n            \"2024-06-02\",\n            \"2024-06-03\",\n            \"2024-06-04\",\n            \"2024-06-05\",\n            \"2024-06-06\",\n            \"2024-06-07\",\n            \"2024-06-08\",\n            \"2024-06-09\",\n            \"2024-06-10\",\n            \"2024-06-11\",\n            \"2024-06-12\",\n            \"2024-06-13\",\n            \"2024-06-14\",\n            \"2024-06-15\",\n            \"2024-06-16\",\n            \"2024-06-17\",\n            \"2024-06-18\",\n            \"2024-06-19\",\n            \"2024-06-20\",\n            \"2024-06-21\",\n            \"2024-06-22\",\n            \"2024-06-23\",\n            \"2024-06-24\",\n            \"2024-06-25\",\n            \"2024-06-26\"\n        ]\n    },\n    \"predictedACTUS\": {\n        \"predictedData\": [\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21,\n            21\n        ],\n        \"dateArray\": [\n            \"2024-05-27\",\n            \"2024-05-28\",\n            \"2024-05-29\",\n            \"2024-05-30\",\n            \"2024-05-31\",\n            \"2024-06-01\",\n            \"2024-06-02\",\n            \"2024-06-03\",\n            \"2024-06-04\",\n            \"2024-06-05\",\n            \"2024-06-06\",\n            \"2024-06-07\",\n            \"2024-06-08\",\n            \"2024-06-09\",\n            \"2024-06-10\",\n            \"2024-06-11\",\n            \"2024-06-12\",\n            \"2024-06-13\",\n            \"2024-06-14\",\n            \"2024-06-15\",\n            \"2024-06-16\",\n            \"2024-06-17\",\n            \"2024-06-18\",\n            \"2024-06-19\",\n            \"2024-06-20\",\n            \"2024-06-21\",\n            \"2024-06-22\",\n            \"2024-06-23\",\n            \"2024-06-24\",\n            \"2024-06-25\",\n            \"2024-06-26\"\n        ]\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "X-API-Key",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://farming-simulator.pstmn.io"
+		}
+	]
+}

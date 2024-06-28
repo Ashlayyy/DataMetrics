@@ -1,0 +1,11 @@
+node_modules
+package-lock.json
+logs
+dist
+.vscode
+.env
+.env.example
+.husky
+LICENSE
+SECURITY.md
+README.md
