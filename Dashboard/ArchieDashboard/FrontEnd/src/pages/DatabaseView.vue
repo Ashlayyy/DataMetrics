@@ -38,6 +38,7 @@
         :average="true"
         :title="'averageCompany.Gigabytes.title'"
         :typeText="'%'"
+        :percentageDisabled="true"
       />
 
       <GraphWrapper
@@ -449,7 +450,7 @@ const updateGrowthFilter = (event: string) => {
 }
 
 .backLink {
-  color: black;
+  color: var(--va-on-background-primary);
   text-decoration: none;
 }
 

@@ -8,12 +8,25 @@ export default {
     clear: 'Clear',
     filterText: 'No date selected!',
     save: 'Save',
-    login: 'Log in',
+    login: 'Log in'
+  },
+  account: {
+    title: 'Account Information',
   },
   select: {
     geenResultaatMatching: 'No results matching',
-    geenResultaat: 'No data available. Please try again later.',
+    geenResultaat: 'No data available. Please try again later.'
   },
+  grid: {
+    1: 'Company',
+    2: 'Date',
+    3: 'Total (GB)',
+    4: 'Correspondence (%)',
+    5: 'Overig (%)',
+    6: 'Users',
+    7: 'Average (%)'
+  },
+  loading: 'loading...',
   menu: {
     profile: {
       account: 'Account',

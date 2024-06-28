@@ -36,9 +36,9 @@ export default class PredictingController implements IPredictingController {
     const predictedGB = await this.predictingService.predict(mappedData.GB, months);
     const predictedMFCP = await this.predictingService.predict(mappedData.MFCP, months);
     const predictedCO = await this.predictingService.predict(mappedData.CO, months);
-    const predictedUS = await this.predictingService.predict(mappedData.US.reverse(), months);
-    const predictedACTUS = await this.predictingService.predict(mappedData.ACT_US.reverse(), months);
-
+    const predictedUS = await this.predictingService.predict(mappedData.US, months);
+    const predictedACTUS = await this.predictingService.predict(mappedData.ACT_US, months);
+    
     return {
       status: 200,
       data: {

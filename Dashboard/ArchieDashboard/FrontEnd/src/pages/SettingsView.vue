@@ -73,4 +73,8 @@ onMounted(() => {
     padding: 1rem;
   }
 }
+
+.backlink {
+  color: var(--va-on-background-primary);
+}
 </style>

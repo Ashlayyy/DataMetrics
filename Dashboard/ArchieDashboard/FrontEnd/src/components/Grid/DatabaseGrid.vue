@@ -65,23 +65,23 @@ export default {
       },
       disableCompareButton: true,
       headers: [
-        { title: 'Company', key: 'Company', sortable: true, width: '20%' },
-        { title: 'Date', key: 'Date', sortable: true, width: '15%' },
+        { title: this.$t('grid.1'), key: 'Company', sortable: true, width: '20%' },
+        { title: this.$t('grid.2'), key: 'Date', sortable: true, width: '15%' },
         {
-          title: 'Totaal (GB)',
+          title: this.$t('grid.3'),
           key: 'Total',
           sortable: true,
           width: '15%'
         },
         {
-          title: 'Correspondence (%)',
+          title: this.$t('grid.4'),
           key: 'Correspondence',
           sortable: true,
           width: '10 %'
         },
-        { title: 'Overig (%)', key: 'Overig', sortable: true, width: '10%' },
-        { title: 'Users', key: 'Users', sortable: true, width: '10%' },
-        { title: 'Average (%)', key: 'Average', sortable: true, width: '15%' }
+        { title: this.$t('grid.5'), key: 'Overig', sortable: true, width: '10%' },
+        { title: this.$t('grid.6'), key: 'Users', sortable: true, width: '10%' },
+        { title: this.$t('grid.7'), key: 'Average', sortable: true, width: '15%' }
       ]
     };
   },

@@ -2,7 +2,7 @@
   <section class="profileSection">
     <div class="profileWrapper">
       <v-card variant="tonal">
-        <v-card-title> Profile Information </v-card-title>
+        <v-card-title> {{ $t('account.title') }} </v-card-title>
         <v-card-text>
           <div v-if="user">
             <v-avatar :image="user.picture" size="100"> </v-avatar>
@@ -28,7 +28,7 @@
               </router-link>
             </v-btn>
           </div>
-          <div v-else>Loading profile...</div>
+          <div v-else>{{ $t('loading') }}</div>
         </v-card-text>
       </v-card>
     </div>
@@ -53,7 +53,7 @@ const dateString = ref(new Date(user.value.updated_at).toLocaleString());
   align-items: center;
   justify-content: center;
   padding: 2.5rem;
-  color: #333;
+  color: var(--va-on-background-primary);
 }
 
 .profileWrapper {
@@ -61,7 +61,7 @@ const dateString = ref(new Date(user.value.updated_at).toLocaleString());
   max-width: 750px;
   padding: 1rem;
   border-radius: 15px;
-  color: #333;
+  color: var(--va-on-background-primary);
   text-align: center;
 }
 
@@ -72,7 +72,7 @@ const dateString = ref(new Date(user.value.updated_at).toLocaleString());
   max-width: 30rem;
   padding: 0.5rem;
   gap: 1rem;
-  color: black;
+  color: var(--va-on-background-primary);
   width: 100%;
 }
 
@@ -82,5 +82,9 @@ const dateString = ref(new Date(user.value.updated_at).toLocaleString());
   justify-content: center;
   padding: 1rem;
   flex-direction: column;
+}
+
+.backlink {
+  color: var(--va-on-background-primary);
 }
 </style>

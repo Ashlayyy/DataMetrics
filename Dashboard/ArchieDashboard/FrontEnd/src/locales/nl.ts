@@ -6,13 +6,25 @@ export default {
   buttonTekst: {
     compare: 'Vergelijken',
     clear: 'Maak leeg',
-    filterText: 'Geen datums geselcteerd!',
+    filterText: 'Geen datums geselecteerd!',
     save: 'Opslaan',
-    login: 'Inloggen',
+    login: 'Inloggen'
+  },
+  account: {
+    title: 'Profiel informatie',
   },
   select: {
     geenResultaatMatching: 'Er is geen resultaat met ',
-    geenResultaat: 'Geen data beschikbaar. Probeer het later opnieuw.',
+    geenResultaat: 'Geen data beschikbaar. Probeer het later opnieuw.'
+  },
+  grid: {
+    1: 'Bedrijf',
+    2: 'Datum',
+    3: 'Totaal (GB)',
+    4: 'Correspondentie (%)',
+    5: 'Overig (%)',
+    6: 'Gebruikers',
+    7: 'Gemiddeld (%)'
   },
   menu: {
     profile: {
@@ -21,6 +33,7 @@ export default {
       logout: 'Uitloggen'
     }
   },
+  loading: 'Bezig met laden...',
   predicted: {
     title: 'Voorspelde Gigabytes',
     types: {
