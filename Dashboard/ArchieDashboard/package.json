@@ -4,7 +4,7 @@
   "description": "Dashboard for Archie",
   "main": "index.js",
   "scripts": {
-    "build": "concurrently \"cd ./FrontEnd && npm build\""
+    "build": "concurrently \"cd ./FrontEnd && npm build\"",
     "start": "concurrently \"cd ./BackEnd && npm run dev\" \"cd ./FrontEnd && npm run dev\"",
     "i-start": "npm install && concurrently \"cd ./BackEnd && npm install && npm run dev\" \"cd ./FrontEnd && npm install && npm run dev\""
   },
