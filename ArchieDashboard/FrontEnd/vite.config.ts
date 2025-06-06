@@ -11,5 +11,10 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  }
+  },
+  define: {
+    // This ensures process is not referenced in the browser
+    'process.env': {}
+  },
+  envPrefix: 'VITE_'
 });
