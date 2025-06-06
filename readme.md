@@ -61,7 +61,3 @@ See the TODO.md file for upcoming features, bugs, and plans.
 # 📄 License
 
 This project is licensed under MIT license.
-
-```
-
-```
